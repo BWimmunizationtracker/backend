@@ -20,7 +20,7 @@ public class Guardian extends Auditable
     private String lastname;
 
     // many:many Guardian:Doctor
-    @ManyToMany(mappedBy = "permissionGiven", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "hasPermissionGuardian", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("guardians")
     private List<Doctor> gavePermissionDoctor = new ArrayList<>();
 

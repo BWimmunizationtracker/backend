@@ -1,5 +1,6 @@
 package com.immunizationtracker.immunization.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Parent;
 
 import javax.persistence.*;
@@ -16,7 +17,9 @@ public class Doctor extends Auditable
     private String doctorname;
 
     // many:many Doctor:Guardian
-
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "permissionGrantedBy", joinColumns = {@JoinColumn(name = "doctorid")}, inverseJoinColumns = {@JoinColumn(name = "parentid")})
+    @JsonIgnoreProperties("doctors")
     private List<Guardian> hasPermissionGuardian = new ArrayList<>();
 
 
@@ -49,5 +52,16 @@ public class Doctor extends Auditable
     public void setName(String name)
     {
         this.doctorname = name;
+    }
+
+
+    public List<Guardian> getHasPermissionGuardian()
+    {
+        return hasPermissionGuardian;
+    }
+
+    public void setHasPermissionGuardian(List<Guardian> hasPermissionGuardian)
+    {
+        this.hasPermissionGuardian = hasPermissionGuardian;
     }
 }
