@@ -1,6 +1,7 @@
 package com.immunizationtracker.immunization.handlers;
 
 import com.immunizationtracker.immunization.exceptions.ResourceNotFoundException;
+import com.immunizationtracker.immunization.models.ErrorDetail;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
