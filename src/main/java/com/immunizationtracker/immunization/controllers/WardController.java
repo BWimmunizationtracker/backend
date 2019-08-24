@@ -31,7 +31,7 @@ public class WardController
 
     // get all Wards
     @GetMapping(value = "/allwards", produces = {"application/json"})
-    public ResponseEntity<?> listAllGuardians(HttpServletRequest request)
+    public ResponseEntity<?> listAllWards(HttpServletRequest request)
     {
         logger.info(request.getMethod() + " " + request.getRequestURI() + " accessed");
 
