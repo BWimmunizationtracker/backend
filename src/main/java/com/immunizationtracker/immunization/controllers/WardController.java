@@ -3,6 +3,7 @@ package com.immunizationtracker.immunization.controllers;
 import com.immunizationtracker.immunization.models.Guardian;
 import com.immunizationtracker.immunization.models.Ward;
 import com.immunizationtracker.immunization.service.GuardianService;
+import com.immunizationtracker.immunization.service.WardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/wards")
-public class GuardianController
+public class WardController
 {
     private static final Logger logger = LoggerFactory.getLogger(GuardianController.class);
 
@@ -60,9 +61,9 @@ public class GuardianController
 
     }
 
-    // add a new guardian
+    // add a new ward
     @PostMapping(value = "/ward")
-    public ResponseEntity<?> addNewGuardian(@Valid @RequestBody Guardian newWard, HttpServletRequest request) throws URISyntaxException
+    public ResponseEntity<?> addNewWard(@Valid @RequestBody Ward newWard, HttpServletRequest request) throws URISyntaxException
     {
         logger.info(request.getMethod() + " " + request.getRequestURI() + " accessed");
 
@@ -70,7 +71,7 @@ public class GuardianController
 
         // set the location header for the newly created resource
         HttpHeaders responseHeaders = new HttpHeaders();
-        URI newWardURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{parentid}").buildAndExpand(newWard.getParentid()).toUri();
+        URI newWardURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{parentid}").buildAndExpand(newWard.getChildid()).toUri();
         responseHeaders.setLocation(newWardURI);
 
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
