@@ -20,6 +20,8 @@
 -- INSERT INTO wrote (bookid, authorid) VALUES (1, 6);
 -- INSERT INTO wrote (bookid, authorid) VALUES (2, 2);
 -- INSERT INTO wrote (bookid, authorid) VALUES (3, 2);
+\
+
 -- INSERT INTO wrote (bookid, authorid) VALUES (4, 5);
 -- INSERT INTO wrote (bookid, authorid) VALUES (4, 3);
 -- INSERT INTO wrote (bookid, authorid) VALUES (5, 4);
@@ -36,6 +38,10 @@ INSERT INTO doctors (doctorid, doctorname) VALUES (3, 'Guy Guyson');
 INSERT INTO wards (wardid, firstname, lastname) VALUES (1, 'Drew', 'Vandeberghe');
 INSERT INTO wards (wardid, firstname, lastname) VALUES (2, 'Justin', 'Vandeberghe');
 INSERT INTO wards (wardid, firstname, lastname) VALUES (3, 'Dawn', 'Kleser');
+
+INSERT INTO immunizations (immunizationid, date, immunizationname, clinic) VALUES (1, CURRENT_DATE, 'Polio', 'Holy Cross');
+INSERT INTO immunizations (immunizationid, date, immunizationname, clinic) VALUES (2, CURRENT_DATE, 'Tetanus', 'St. Thomas');
+INSERT INTO immunizations (immunizationid, date, immunizationname, clinic) VALUES (3, CURRENT_DATE, 'Malaria', 'Sloan Memorial');
 
 
 

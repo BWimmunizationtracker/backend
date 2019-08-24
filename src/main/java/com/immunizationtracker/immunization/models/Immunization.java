@@ -23,7 +23,8 @@ public class Immunization extends Auditable
 
     public Immunization(String immunizationname, String clinic)
     {
-        this.date = new Date();
+        Date currDate = new Date();
+        this.date = currDate;
         this.immunizationname = immunizationname;
         this.clinic = clinic;
     }

@@ -14,7 +14,10 @@ public class Doctor extends Auditable
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long doctorid;
     private String doctorname;
-//    private List<Parent> hasPermissionParent = new ArrayList<>();
+
+    // many:many Doctor:Guardian
+
+    private List<Guardian> hasPermissionGuardian = new ArrayList<>();
 
 
     public Doctor()
