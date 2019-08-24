@@ -5,6 +5,7 @@ import com.immunizationtracker.immunization.repositories.GuardianRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class GuardianServiceImpl implements GuardianService
     @Override
     public Guardian findGuardianById(long id)
     {
-        return null;
+        return guardianRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
     }
 
     @Override
