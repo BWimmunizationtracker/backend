@@ -37,7 +37,7 @@ public class Guardian extends Auditable
     }
 
     // getter and setters
-    
+
     public long getParentid()
     {
         return parentid;
