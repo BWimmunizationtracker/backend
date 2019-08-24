@@ -8,7 +8,7 @@ public class Ward
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long childid;
+    private long wardid;
 
     private String firstname;
     private String lastname;
@@ -30,12 +30,12 @@ public class Ward
 
     public long getChildid()
     {
-        return childid;
+        return wardid;
     }
 
     public void setChildid(long childid)
     {
-        this.childid = childid;
+        this.wardid = childid;
     }
 
     public String getFirstname()

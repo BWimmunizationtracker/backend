@@ -13,7 +13,7 @@ public class Doctor extends Auditable
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long doctorid;
-    private String name;
+    private String doctorname;
 //    private List<Parent> hasPermissionParent = new ArrayList<>();
 
 
@@ -23,7 +23,7 @@ public class Doctor extends Auditable
 
     public Doctor(String name)
     {
-        this.name = name;
+        this.doctorname = name;
     }
 
     public long getDoctorid()
@@ -38,11 +38,11 @@ public class Doctor extends Auditable
 
     public String getName()
     {
-        return name;
+        return doctorname;
     }
 
     public void setName(String name)
     {
-        this.name = name;
+        this.doctorname = name;
     }
 }
