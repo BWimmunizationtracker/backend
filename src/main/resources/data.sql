@@ -26,16 +26,16 @@
 
 
 INSERT INTO guardians (parentid, firstname, lastname) VALUES (1, 'Rory', 'Murray');
-INSERT INTO guardians (parentid, firstname, lastname) VALUES (1, 'Abbey', 'Murray');
-INSERT INTO guardians (parentid, firstname, lastname) VALUES (1, 'Tate', 'Murray');
+INSERT INTO guardians (parentid, firstname, lastname) VALUES (2, 'Abbey', 'Murray');
+INSERT INTO guardians (parentid, firstname, lastname) VALUES (3, 'Tate', 'Murray');
 
 INSERT INTO doctors (doctorid, doctorname) VALUES (1, 'Mr. Magoo');
-INSERT INTO doctors (doctorid, doctorname) VALUES (1, 'Jiminy Cricket');
-INSERT INTO doctors (doctorid, doctorname) VALUES (1, 'Guy Guyson');
+INSERT INTO doctors (doctorid, doctorname) VALUES (2, 'Jiminy Cricket');
+INSERT INTO doctors (doctorid, doctorname) VALUES (3, 'Guy Guyson');
 
 INSERT INTO wards (wardid, firstname, lastname) VALUES (1, 'Drew', 'Vandeberghe');
-INSERT INTO wards (wardid, firstname, lastname) VALUES (1, 'Justin', 'Vandeberghe');
-INSERT INTO wards (wardid, firstname, lastname) VALUES (1, 'Dawn', 'Kleser');
+INSERT INTO wards (wardid, firstname, lastname) VALUES (2, 'Justin', 'Vandeberghe');
+INSERT INTO wards (wardid, firstname, lastname) VALUES (3, 'Dawn', 'Kleser');
 
 
 
