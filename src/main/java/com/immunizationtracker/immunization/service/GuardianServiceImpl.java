@@ -62,6 +62,19 @@ public class GuardianServiceImpl implements GuardianService
     @Override
     public Guardian update(Guardian guardian, long id)
     {
-        return null;
+      Guardian currentGuardian = guardianRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
+
+      if (guardian.getFirstname() != null)
+      {
+          currentGuardian.setFirstname(guardian.getFirstname());
+          currentGuardian.setLastname(guardian.getLastname());
+      }
+      return guardianRepository.save(currentGuardian);
+
     }
+
+
+
+
+
 }
