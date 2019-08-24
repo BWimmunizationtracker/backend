@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,6 +36,16 @@ public class GuardianController
         List<Guardian> allGuardians = guardianService.findAll();
         return new ResponseEntity<>(allGuardians, HttpStatus.OK);
 
+    }
+
+    // get Guardian by id
+    @GetMapping(value = "/guardian/{guardianid}", produces = {"application/json"})
+    public ResponseEntity<?> getGuardianById(@PathVariable long guardianid, HttpServletRequest request)
+    {
+        logger.info(request.getMethod() + " " + request.getRequestURI() + " accessed");
+
+        Guardian g = guardianService.findGuardianById(guardianid);
+        return new ResponseEntity<>(g, HttpStatus.OK);
     }
 
 
