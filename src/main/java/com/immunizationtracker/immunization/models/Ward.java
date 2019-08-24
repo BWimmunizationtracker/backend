@@ -16,6 +16,8 @@ public class Ward
     // parentid will be a foreign key
     // private List<Immunization> immunizations = new ArrayList<>();
 
+    // needs foreign key to Immunization
+
 
     public Ward()
     {

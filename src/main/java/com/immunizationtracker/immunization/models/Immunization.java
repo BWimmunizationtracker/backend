@@ -15,6 +15,8 @@ public class Immunization extends Auditable
     private String immunizationname;
     private String clinic;
 
+    // needs foreign key to Ward
+
     public Immunization()
     {
     }

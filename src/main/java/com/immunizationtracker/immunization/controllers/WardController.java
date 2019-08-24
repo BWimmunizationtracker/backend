@@ -1,8 +1,7 @@
 package com.immunizationtracker.immunization.controllers;
 
-
-
 import com.immunizationtracker.immunization.models.Guardian;
+import com.immunizationtracker.immunization.models.Ward;
 import com.immunizationtracker.immunization.service.GuardianService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.net.URI;
@@ -21,70 +19,70 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/guardians")
+@RequestMapping("/wards")
 public class GuardianController
 {
     private static final Logger logger = LoggerFactory.getLogger(GuardianController.class);
 
 
     @Autowired
-    private GuardianService guardianService;
+    private WardService wardService;
 
-    // get all Guardians
-    @GetMapping(value = "/allguardians", produces = {"application/json"})
+    // get all Wards
+    @GetMapping(value = "/allwards", produces = {"application/json"})
     public ResponseEntity<?> listAllGuardians(HttpServletRequest request)
     {
         logger.info(request.getMethod() + " " + request.getRequestURI() + " accessed");
 
-        List<Guardian> allGuardians = guardianService.findAll();
-        return new ResponseEntity<>(allGuardians, HttpStatus.OK);
+        List<Ward> allWards= wardService.findAll();
+        return new ResponseEntity<>(allWards, HttpStatus.OK);
 
     }
 
-    // get Guardian by id
-    @GetMapping(value = "/guardian/{guardianid}", produces = {"application/json"})
-    public ResponseEntity<?> getGuardianById(@PathVariable long guardianid, HttpServletRequest request)
+    // get Ward by id
+    @GetMapping(value = "/ward/{wardid}", produces = {"application/json"})
+    public ResponseEntity<?> getWardById(@PathVariable long wardid, HttpServletRequest request)
     {
         logger.info(request.getMethod() + " " + request.getRequestURI() + " accessed");
 
-        Guardian g = guardianService.findGuardianById(guardianid);
-        return new ResponseEntity<>(g, HttpStatus.OK);
+        Ward w = wardService.findWardById(wardid);
+        return new ResponseEntity<>(w, HttpStatus.OK);
     }
 
-    // delete Guardian by id
-    @DeleteMapping("/guardian/{guardianid}")
-    public ResponseEntity<?> deleteGuardianById(@PathVariable long guardianid, HttpServletRequest request)
+    // delete Ward by id
+    @DeleteMapping("/ward/{wardid}")
+    public ResponseEntity<?> deleteWardById(@PathVariable long wardid, HttpServletRequest request)
     {
         logger.info(request.getMethod() + " " + request.getRequestURI() + " accessed");
 
-        guardianService.delete(guardianid);
+        wardService.delete(wardid);
         return new ResponseEntity<>(HttpStatus.OK);
 
     }
 
     // add a new guardian
-    @PostMapping(value = "/guardian")
-    public ResponseEntity<?> addNewGuardian(@Valid @RequestBody Guardian newGuardian, HttpServletRequest request) throws URISyntaxException
+    @PostMapping(value = "/ward")
+    public ResponseEntity<?> addNewGuardian(@Valid @RequestBody Guardian newWard, HttpServletRequest request) throws URISyntaxException
     {
         logger.info(request.getMethod() + " " + request.getRequestURI() + " accessed");
 
-        newGuardian = guardianService.save(newGuardian);
+        newWard = wardService.save(newWard);
 
         // set the location header for the newly created resource
         HttpHeaders responseHeaders = new HttpHeaders();
-        URI newStudentURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{parentid}").buildAndExpand(newGuardian.getParentid()).toUri();
-        responseHeaders.setLocation(newStudentURI);
+        URI newWardURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{parentid}").buildAndExpand(newWard.getParentid()).toUri();
+        responseHeaders.setLocation(newWardURI);
 
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
     }
 
     // update a guardian
-    @PutMapping(value = "/guardian/{guardianid}")
-    public ResponseEntity<?> updateGuardianById(@RequestBody Guardian updateGuardian, @PathVariable long guardianid, HttpServletRequest request)
+    @PutMapping(value = "/ward/{wardid}")
+    public ResponseEntity<?> updateWardById(@RequestBody Ward updateWard, @PathVariable long wardid, HttpServletRequest request)
     {
         logger.info(request.getMethod() + " " + request.getRequestURI() + " accessed");
 
-        guardianService.update(updateGuardian, guardianid);
+        wardService.update(updateWard, wardid);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
