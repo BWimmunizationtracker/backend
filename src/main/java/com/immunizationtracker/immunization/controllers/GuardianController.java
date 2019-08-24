@@ -78,11 +78,14 @@ public class GuardianController
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
     }
 
-
-
     // update a guardian
+    @PutMapping(value = "/guardian/{guardianid}")
+    public ResponseEntity<?> updateGuardian(@RequestBody Guardian updateGuardian, @PathVariable long guardianid, HttpServletRequest request)
+    {
+        logger.info(request.getMethod() + " " + request.getRequestURI() + " accessed");
 
-
-
+        guardianService.update(updateGuardian, guardianid);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 }
