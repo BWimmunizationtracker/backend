@@ -33,8 +33,16 @@ public class GuardianServiceImpl implements GuardianService
     }
 
     @Override
-    public void delete(long id)
+    public void delete(long id) throws EntityNotFoundException
     {
+        if (guardianRepository.findById(id).isPresent())
+        {
+            guardianRepository.deleteById(id);
+        }
+        else
+        {
+            throw new EntityNotFoundException(Long.toString(id));
+        }
 
     }
 

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -47,6 +48,9 @@ public class GuardianController
         Guardian g = guardianService.findGuardianById(guardianid);
         return new ResponseEntity<>(g, HttpStatus.OK);
     }
+
+    // delete Guardian by id
+
 
 
 
