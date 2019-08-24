@@ -4,6 +4,7 @@ import com.immunizationtracker.immunization.models.Guardian;
 import com.immunizationtracker.immunization.repositories.GuardianRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
@@ -46,10 +47,18 @@ public class GuardianServiceImpl implements GuardianService
 
     }
 
+    @Transactional
     @Override
     public Guardian save(Guardian guardian)
     {
-        return null;
+        Guardian newGuardian = new Guardian();
+
+        newGuardian.setFirstname(guardian.getFirstname());
+        newGuardian.setLastname(guardian.getLastname());
+
+        return guardianRepository.save(newGuardian);
+
+       
     }
 
     @Override
