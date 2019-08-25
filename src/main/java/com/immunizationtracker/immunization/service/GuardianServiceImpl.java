@@ -6,6 +6,7 @@ import com.immunizationtracker.immunization.models.Permission;
 import com.immunizationtracker.immunization.repositories.DoctorRepository;
 import com.immunizationtracker.immunization.repositories.GuardianRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,6 +55,7 @@ public class GuardianServiceImpl implements GuardianService
     }
 
     @Transactional
+    @Modifying
     @Override
     public Guardian save(Guardian guardian)
     {
@@ -71,6 +73,8 @@ public class GuardianServiceImpl implements GuardianService
         return guardianRepository.save(newGuardian);
     }
 
+    @Transactional
+    @Modifying
     @Override
     public Guardian update(Guardian guardian, long id)
     {
@@ -79,9 +83,21 @@ public class GuardianServiceImpl implements GuardianService
       if (guardian.getFirstname() != null)
       {
           currentGuardian.setFirstname(guardian.getFirstname());
-          currentGuardian.setLastname(guardian.getLastname());
-          currentGuardian.setPermissions(guardian.getPermissions());
       }
+      if (guardian.getLastname() != null)
+      {
+            currentGuardian.setLastname(guardian.getLastname());
+      }
+      if (guardian.getPermissions().size() > 0)
+      {
+          doctorRepository.deletePermissionsByGuardianId(currentGuardian.getParentid());
+
+          for (Permission p : guardian.getPermissions())
+          {
+              doctorRepository.insertPermission(id, p.getDoctor().getDoctorid());
+          }
+      }
+
       return guardianRepository.save(currentGuardian);
 
     }
