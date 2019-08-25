@@ -19,7 +19,6 @@ public class Doctor extends Auditable
 
     // many:many Doctor:Guardian
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
-    @JoinTable(name = "permissions", joinColumns = {@JoinColumn(name = "doctorid")}, inverseJoinColumns = {@JoinColumn(name = "parentid")})
     @JsonIgnoreProperties("doctors")
     private List<Permission> permissions = new ArrayList<>();
 

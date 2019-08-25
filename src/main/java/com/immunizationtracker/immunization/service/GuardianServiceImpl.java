@@ -60,7 +60,7 @@ public class GuardianServiceImpl implements GuardianService
 
         newGuardian.setFirstname(guardian.getFirstname());
         newGuardian.setLastname(guardian.getLastname());
-        newGuardian.setDoctors(guardian.getDoctors());
+        newGuardian.setPermissions(guardian.getPermissions());
 
         return guardianRepository.save(newGuardian);
     }
@@ -74,7 +74,7 @@ public class GuardianServiceImpl implements GuardianService
       {
           currentGuardian.setFirstname(guardian.getFirstname());
           currentGuardian.setLastname(guardian.getLastname());
-          currentGuardian.setDoctors(guardian.getDoctors());
+          currentGuardian.setPermissions(guardian.getPermissions());
       }
       return guardianRepository.save(currentGuardian);
 

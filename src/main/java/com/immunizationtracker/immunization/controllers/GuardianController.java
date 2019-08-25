@@ -4,6 +4,7 @@ package com.immunizationtracker.immunization.controllers;
 
 import com.immunizationtracker.immunization.models.Doctor;
 import com.immunizationtracker.immunization.models.Guardian;
+import com.immunizationtracker.immunization.models.Permission;
 import com.immunizationtracker.immunization.service.DoctorService;
 import com.immunizationtracker.immunization.service.GuardianService;
 import org.slf4j.Logger;
@@ -86,7 +87,7 @@ public class GuardianController
     }
 
     // update a guardian
-    @PutMapping(value = "/guardian/{guardianid}")
+    @PostMapping(value = "/guardian/{guardianid}")
     public ResponseEntity<?> updateGuardianById(@RequestBody Guardian updateGuardian, @PathVariable long guardianid, HttpServletRequest request)
     {
         logger.info(request.getMethod() + " " + request.getRequestURI() + " accessed");
@@ -101,25 +102,18 @@ public class GuardianController
     {
         logger.trace(request.getRequestURI() + " accessed");
         // get guardian and doctor by searching by id
-        Guardian guardian = guardianService.findGuardianById(guardianid);
-        Doctor doctor = doctorService.findDoctorById(doctorid);
+        Guardian currentGuardian = guardianService.findGuardianById(guardianid);
+        Doctor newDoctor = doctorService.findDoctorById(doctorid);
 
         // add the doctor to the list of approved doctor on the Guardian object
 
-        List<Doctor> doctorList = guardian.getDoctors();
-        doctorList.add(doctor);
-        guardian.setDoctors(doctorList);
-        guardianService.save(guardian);
+        List<Permission> newPermissionList = currentGuardian.getPermissions();
+        newPermissionList.add(new Permission(currentGuardian, newDoctor));
+        currentGuardian.setPermissions(newPermissionList);
+        guardianService.update(currentGuardian, guardianid);
 
 
-
-
-
-
-
-
-
-        return new ResponseEntity<>(guardian.getDoctors(), HttpStatus.CREATED);
+        return new ResponseEntity<>(currentGuardian, HttpStatus.CREATED);
 
     }
 
