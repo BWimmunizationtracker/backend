@@ -1,6 +1,7 @@
 package com.immunizationtracker.immunization.service;
 
 import com.immunizationtracker.immunization.models.Doctor;
+import com.immunizationtracker.immunization.models.Permission;
 import com.immunizationtracker.immunization.models.Ward;
 import com.immunizationtracker.immunization.repositories.DoctorRepository;
 import com.immunizationtracker.immunization.repositories.WardRepository;
@@ -69,11 +70,15 @@ public class DoctorServiceImpl implements DoctorService
     {
         Doctor currentDoctor = doctorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
 
-        if (doctor.getName() != null)
+        if (doctor.getPermissions().size() > 0)
         {
-            currentDoctor.setName(doctor.getName());
+            for (Permission permission : doctor.getPermissions())
+            {
+                currentDoctor.getPermissions().add(new Permission(permission.getGuardian(), currentDoctor));
+            }
+            return doctorRepository.save(currentDoctor);
         }
-        return doctorRepository.save(currentDoctor);
+        throw new EntityNotFoundException(doctor.getName());
 
     }
 
