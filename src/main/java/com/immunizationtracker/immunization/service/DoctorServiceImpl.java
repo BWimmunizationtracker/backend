@@ -56,6 +56,7 @@ public class DoctorServiceImpl implements DoctorService
         Doctor newDoctor = new Doctor();
 
         newDoctor.setName(doctor.getName());
+        newDoctor.setHasPermissionGuardian(doctor.getHasPermissionGuardian());
 
 
         return doctorRepository.save(newDoctor);

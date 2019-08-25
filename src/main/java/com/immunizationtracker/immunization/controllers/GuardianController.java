@@ -95,23 +95,39 @@ public class GuardianController
     }
 
     // need endpoint to add a doctor to the gavePermissionDoctor ArrayList
+//    @PutMapping(value = "/guardian/{guardianid}/doctor/{doctorid}")
+//    public ResponseEntity<?> addApprovedDoctor( HttpServletRequest request, @PathVariable long guardianid, @PathVariable long doctorid)
+//    {
+//        logger.trace(request.getRequestURI() + " accessed");
+//        // get guardian and doctor by searching by id
+//        Guardian guardian = guardianService.findGuardianById(guardianid);
+//        Doctor doctor = doctorService.findDoctorById(doctorid);
+//
+//        // add the doctor to the list of approved doctor on the Guardian object
+//
+//
+//
+////        Guardian g = new Guardian();
+//        guardian.getGavePermissionDoctor().add(doctor);
+////        g.setParentid(guardian.getParentid());
+////        g.setFirstname(guardian.getFirstname());
+////        g.setLastname(guardian.getLastname());
+////        g.setGavePermissionDoctor(guardian.getGavePermissionDoctor());
+//
+////        guardianService.update(guardian, guardianid);
+//
+//
+//        return new ResponseEntity<>(guardian, HttpStatus.CREATED);
+//
+//    }
+
     @PutMapping(value = "/guardian/{guardianid}/doctor/{doctorid}")
     public ResponseEntity<?> addApprovedDoctor( HttpServletRequest request, @PathVariable long guardianid, @PathVariable long doctorid)
     {
-        logger.trace(request.getRequestURI() + " accessed");
-        // get guardian and doctor by searching by id
-        Guardian guardian = guardianService.findGuardianById(guardianid);
-        Doctor doctor = doctorService.findDoctorById(doctorid);
 
-        // add the doctor to the list of approved doctor on the Guardian object
+        Guardian newGuardian = guardianService.updateGuardianToDoctor(guardianid, doctorid);
 
-
-        guardian.getGavePermissionDoctor().add(doctor);
-        guardianService.update(guardian, guardianid);
-
-//        guardianService.update(guardian, guardianid);
-//        updateBook(book, bookid);
-        return new ResponseEntity<>(guardian, HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.CREATED);
 
     }
 
