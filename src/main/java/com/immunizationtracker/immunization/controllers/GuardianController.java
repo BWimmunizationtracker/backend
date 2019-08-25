@@ -2,7 +2,9 @@ package com.immunizationtracker.immunization.controllers;
 
 
 
+import com.immunizationtracker.immunization.models.Doctor;
 import com.immunizationtracker.immunization.models.Guardian;
+import com.immunizationtracker.immunization.service.DoctorService;
 import com.immunizationtracker.immunization.service.GuardianService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.awt.print.Book;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -29,6 +32,9 @@ public class GuardianController
 
     @Autowired
     private GuardianService guardianService;
+
+    @Autowired
+    private DoctorService doctorService;
 
     // get all Guardians
     @GetMapping(value = "/allguardians", produces = {"application/json"})
@@ -87,5 +93,28 @@ public class GuardianController
         guardianService.update(updateGuardian, guardianid);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    // need endpoint to add a doctor to the gavePermissionDoctor ArrayList
+    @PutMapping(value = "/guardian/{guardianid}/doctor/{doctorid}")
+    public ResponseEntity<?> addApprovedDoctor( HttpServletRequest request, @PathVariable long guardianid, @PathVariable long doctorid)
+    {
+        logger.trace(request.getRequestURI() + " accessed");
+        // get guardian and doctor by searching by id
+        Guardian guardian = guardianService.findGuardianById(guardianid);
+        Doctor doctor = doctorService.findDoctorById(doctorid);
+
+        // add the doctor to the list of approved doctor on the Guardian object
+
+
+        guardian.getGavePermissionDoctor().add(doctor);
+        guardianService.update(guardian, guardianid);
+
+//        guardianService.update(guardian, guardianid);
+//        updateBook(book, bookid);
+        return new ResponseEntity<>(guardian, HttpStatus.OK);
+
+    }
+
+
 
 }
