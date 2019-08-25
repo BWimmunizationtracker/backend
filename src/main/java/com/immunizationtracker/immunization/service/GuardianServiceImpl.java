@@ -2,6 +2,7 @@ package com.immunizationtracker.immunization.service;
 
 import com.immunizationtracker.immunization.models.Doctor;
 import com.immunizationtracker.immunization.models.Guardian;
+import com.immunizationtracker.immunization.models.Permission;
 import com.immunizationtracker.immunization.repositories.DoctorRepository;
 import com.immunizationtracker.immunization.repositories.GuardianRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,8 +61,13 @@ public class GuardianServiceImpl implements GuardianService
 
         newGuardian.setFirstname(guardian.getFirstname());
         newGuardian.setLastname(guardian.getLastname());
-        newGuardian.setPermissions(guardian.getPermissions());
+        ArrayList<Permission> newPermissions = new ArrayList<>();
 
+        for (Permission p : guardian.getPermissions())
+        {
+            newPermissions.add(new Permission(newGuardian, p.getDoctor()));
+        }
+        newGuardian.setPermissions(newPermissions);
         return guardianRepository.save(newGuardian);
     }
 
