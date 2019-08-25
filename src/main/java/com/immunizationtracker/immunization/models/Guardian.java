@@ -20,9 +20,9 @@ public class Guardian extends Auditable
     private String lastname;
 
     // many:many Guardian:Doctor
-    @ManyToMany(mappedBy = "guardians", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "guardians", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("guardians")
-    private List<Doctor> doctors = new ArrayList<>();
+    private List<Permission> permissions = new ArrayList<>();
 
 //    private List<Child> children = new ArrayList<>();
 
@@ -34,12 +34,19 @@ public class Guardian extends Auditable
 
     // create constructor
 
-
-    public Guardian(String firstname, String lastname)
+    public Guardian(String firstname, String lastname, List<Permission> permissions)
     {
         this.firstname = firstname;
         this.lastname = lastname;
+
+        for (Permission p : permissions)
+        {
+            p.setGuardian(this);
+        }
+
+        this.permissions = permissions;
     }
+
 
     // getter and setters
 
@@ -73,13 +80,13 @@ public class Guardian extends Auditable
         this.lastname = lastname;
     }
 
-    public List<Doctor> getDoctors()
+    public List<Permission> getPermissions()
     {
-        return doctors;
+        return permissions;
     }
 
-    public void setDoctors(List<Doctor> doctors)
+    public void setPermissions(List<Permission> permissions)
     {
-        this.doctors = doctors;
+        this.permissions = permissions;
     }
 }
