@@ -1,6 +1,8 @@
 package com.immunizationtracker.immunization.service;
 
+import com.immunizationtracker.immunization.models.Doctor;
 import com.immunizationtracker.immunization.models.Guardian;
+import com.immunizationtracker.immunization.repositories.DoctorRepository;
 import com.immunizationtracker.immunization.repositories.GuardianRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,9 @@ public class GuardianServiceImpl implements GuardianService
     // so that we have access to the data access object methods
     @Autowired
     private GuardianRepository guardianRepository;
+
+    @Autowired
+    private DoctorRepository doctorRepository;
 
     // next we will implement the methods from our interface
     @Override
@@ -55,7 +60,7 @@ public class GuardianServiceImpl implements GuardianService
 
         newGuardian.setFirstname(guardian.getFirstname());
         newGuardian.setLastname(guardian.getLastname());
-        newGuardian.setGavePermissionDoctor(guardian.getGavePermissionDoctor());
+        newGuardian.setDoctors(guardian.getDoctors());
 
         return guardianRepository.save(newGuardian);
     }
@@ -69,10 +74,11 @@ public class GuardianServiceImpl implements GuardianService
       {
           currentGuardian.setFirstname(guardian.getFirstname());
           currentGuardian.setLastname(guardian.getLastname());
-          currentGuardian.setGavePermissionDoctor(guardian.getGavePermissionDoctor());
+          currentGuardian.setDoctors(guardian.getDoctors());
       }
       return guardianRepository.save(currentGuardian);
 
     }
+
 
 }

@@ -35,6 +35,7 @@ public class DoctorServiceImpl implements DoctorService
         return doctorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
     }
 
+
     @Override
     public void delete(long id) throws EntityNotFoundException
     {
@@ -47,6 +48,7 @@ public class DoctorServiceImpl implements DoctorService
             throw new EntityNotFoundException(Long.toString(id));
         }
 
+
     }
 
     @Transactional
@@ -56,7 +58,7 @@ public class DoctorServiceImpl implements DoctorService
         Doctor newDoctor = new Doctor();
 
         newDoctor.setName(doctor.getName());
-        newDoctor.setHasPermissionGuardian(doctor.getHasPermissionGuardian());
+        newDoctor.setGuardians(doctor.getGuardians());
 
 
         return doctorRepository.save(newDoctor);

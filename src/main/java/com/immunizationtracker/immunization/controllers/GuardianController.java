@@ -21,6 +21,7 @@ import javax.validation.Valid;
 import java.awt.print.Book;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -95,41 +96,34 @@ public class GuardianController
     }
 
     // need endpoint to add a doctor to the gavePermissionDoctor ArrayList
-//    @PutMapping(value = "/guardian/{guardianid}/doctor/{doctorid}")
-//    public ResponseEntity<?> addApprovedDoctor( HttpServletRequest request, @PathVariable long guardianid, @PathVariable long doctorid)
-//    {
-//        logger.trace(request.getRequestURI() + " accessed");
-//        // get guardian and doctor by searching by id
-//        Guardian guardian = guardianService.findGuardianById(guardianid);
-//        Doctor doctor = doctorService.findDoctorById(doctorid);
-//
-//        // add the doctor to the list of approved doctor on the Guardian object
-//
-//
-//
-////        Guardian g = new Guardian();
-//        guardian.getGavePermissionDoctor().add(doctor);
-////        g.setParentid(guardian.getParentid());
-////        g.setFirstname(guardian.getFirstname());
-////        g.setLastname(guardian.getLastname());
-////        g.setGavePermissionDoctor(guardian.getGavePermissionDoctor());
-//
-////        guardianService.update(guardian, guardianid);
-//
-//
-//        return new ResponseEntity<>(guardian, HttpStatus.CREATED);
-//
-//    }
-
     @PutMapping(value = "/guardian/{guardianid}/doctor/{doctorid}")
-    public ResponseEntity<?> addApprovedDoctor( HttpServletRequest request, @PathVariable long guardianid, @PathVariable long doctorid)
+    public ResponseEntity<?> addApprovedDoctor(HttpServletRequest request, @PathVariable long guardianid, @PathVariable long doctorid)
     {
+        logger.trace(request.getRequestURI() + " accessed");
+        // get guardian and doctor by searching by id
+        Guardian guardian = guardianService.findGuardianById(guardianid);
+        Doctor doctor = doctorService.findDoctorById(doctorid);
 
-        Guardian newGuardian = guardianService.updateGuardianToDoctor(guardianid, doctorid);
+        // add the doctor to the list of approved doctor on the Guardian object
 
-        return new ResponseEntity<>(null, HttpStatus.CREATED);
+        List<Doctor> doctorList = guardian.getDoctors();
+        doctorList.add(doctor);
+        guardian.setDoctors(doctorList);
+        guardianService.save(guardian);
+
+
+
+
+
+
+
+
+
+        return new ResponseEntity<>(guardian.getDoctors(), HttpStatus.CREATED);
 
     }
+
+
 
 
 

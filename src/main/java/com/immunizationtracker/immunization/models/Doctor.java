@@ -18,9 +18,9 @@ public class Doctor extends Auditable
 
     // many:many Doctor:Guardian
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "permissionGrantedBy", joinColumns = {@JoinColumn(name = "doctorid")}, inverseJoinColumns = {@JoinColumn(name = "parentid")})
+    @JoinTable(name = "permissions", joinColumns = {@JoinColumn(name = "doctorid")}, inverseJoinColumns = {@JoinColumn(name = "parentid")})
     @JsonIgnoreProperties("doctors")
-    private List<Guardian> hasPermissionGuardian = new ArrayList<>();
+    private List<Guardian> guardians = new ArrayList<>();
 
 
     public Doctor()
@@ -54,14 +54,14 @@ public class Doctor extends Auditable
         this.doctorname = name;
     }
 
-
-    public List<Guardian> getHasPermissionGuardian()
+    public List<Guardian> getGuardians()
     {
-        return hasPermissionGuardian;
+        return guardians;
     }
 
-    public void setHasPermissionGuardian(List<Guardian> hasPermissionGuardian)
+    public void setGuardians(List<Guardian> guardians)
     {
-        this.hasPermissionGuardian = hasPermissionGuardian;
+        this.guardians = guardians;
     }
+
 }

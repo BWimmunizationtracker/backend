@@ -16,6 +16,5 @@ public interface GuardianService
 
     Guardian update(Guardian guardian, long id);
 
-    Guardian updateGuardianToAuthor(long guardianid, long doctorid);
 
 }

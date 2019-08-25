@@ -20,9 +20,9 @@ public class Guardian extends Auditable
     private String lastname;
 
     // many:many Guardian:Doctor
-    @ManyToMany(mappedBy = "hasPermissionGuardian", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "guardians", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("guardians")
-    private List<Doctor> gavePermissionDoctor = new ArrayList<>();
+    private List<Doctor> doctors = new ArrayList<>();
 
 //    private List<Child> children = new ArrayList<>();
 
@@ -73,13 +73,13 @@ public class Guardian extends Auditable
         this.lastname = lastname;
     }
 
-    public List<Doctor> getGavePermissionDoctor()
+    public List<Doctor> getDoctors()
     {
-        return gavePermissionDoctor;
+        return doctors;
     }
 
-    public void setGavePermissionDoctor(List<Doctor> gavePermissionDoctor)
+    public void setDoctors(List<Doctor> doctors)
     {
-        this.gavePermissionDoctor = gavePermissionDoctor;
+        this.doctors = doctors;
     }
 }
