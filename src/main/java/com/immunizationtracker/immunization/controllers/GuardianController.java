@@ -87,7 +87,7 @@ public class GuardianController
     }
 
     // update a guardian
-    @PostMapping(value = "/guardian/{guardianid}")
+    @PutMapping(value = "/guardian/{guardianid}")
     public ResponseEntity<?> updateGuardianById(@RequestBody Guardian updateGuardian, @PathVariable long guardianid, HttpServletRequest request)
     {
         logger.info(request.getMethod() + " " + request.getRequestURI() + " accessed");
@@ -97,7 +97,7 @@ public class GuardianController
     }
 
     // need endpoint to add a doctor to the gavePermissionDoctor ArrayList
-    @PutMapping(value = "/guardian/{guardianid}/doctor/{doctorid}")
+    @PostMapping(value = "/guardian/{guardianid}/doctor/{doctorid}")
     public ResponseEntity<?> addApprovedDoctor(HttpServletRequest request, @PathVariable long guardianid, @PathVariable long doctorid)
     {
         logger.trace(request.getRequestURI() + " accessed");
