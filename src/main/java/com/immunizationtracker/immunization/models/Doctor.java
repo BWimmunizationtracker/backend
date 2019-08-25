@@ -14,13 +14,14 @@ public class Doctor extends Auditable
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long doctorid;
+
     private String doctorname;
 
     // many:many Doctor:Guardian
-    @ManyToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
     @JoinTable(name = "permissions", joinColumns = {@JoinColumn(name = "doctorid")}, inverseJoinColumns = {@JoinColumn(name = "parentid")})
     @JsonIgnoreProperties("doctors")
-    private List<Guardian> guardians = new ArrayList<>();
+    private List<Permission> permissions = new ArrayList<>();
 
 
     public Doctor()
@@ -54,14 +55,13 @@ public class Doctor extends Auditable
         this.doctorname = name;
     }
 
-    public List<Guardian> getGuardians()
+    public List<Permission> getPermissions()
     {
-        return guardians;
+        return permissions;
     }
 
-    public void setGuardians(List<Guardian> guardians)
+    public void setPermissions(List<Permission> permissions)
     {
-        this.guardians = guardians;
+        this.permissions = permissions;
     }
-
 }
