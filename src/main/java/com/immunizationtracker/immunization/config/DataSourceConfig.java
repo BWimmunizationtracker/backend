@@ -28,8 +28,8 @@ public class DataSourceConfig
 
         if (dbValue.equalsIgnoreCase("POSTGRESQL"))
         {
-            myUrlString = "jdbc:postgresql://" + System.getenv("MYDBHOST") + ":5432/" + System.getenv("MYDBNAME");
-//            myUrlString = "jdbc:postgresql://localhost:5432/rorychristianmurray-bookstore-local";
+//            myUrlString = "jdbc:postgresql://" + System.getenv("MYDBHOST") + ":5432/" + System.getenv("MYDBNAME");
+            myUrlString = "jdbc:postgresql://localhost:5432/immunizationtracker";
             myDriverClass = "org.postgresql.Driver";
             myDBUser = System.getenv("MYDBUSER");
             myDBPassword = System.getenv("MYDBPASSWORD");
