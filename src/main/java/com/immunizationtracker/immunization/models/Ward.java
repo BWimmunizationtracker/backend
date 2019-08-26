@@ -20,6 +20,11 @@ public class Ward
 
     // many to one relationship to Guardian
     // guardianid will be a foreign key
+    @ManyToOne
+    @JoinColumn(name = "guardianid")
+    @JsonIgnoreProperties("wards")
+    private Guardian guardian;
+
 
     //one to many relationship to Immunization
     // private List<Immunization> immunizations = new ArrayList<>();
@@ -34,11 +39,12 @@ public class Ward
     {
     }
 
-    public Ward(String firstname, String lastname, List<Immunization> immunizations)
+    public Ward(String firstname, String lastname, List<Immunization> immunizations, Guardian guardian)
     {
         this.firstname = firstname;
         this.lastname = lastname;
         this.immunizations = immunizations;
+        this.guardian = guardian;
 
     }
 
@@ -81,6 +87,16 @@ public class Ward
     public void setImmunizations(List<Immunization> immunizations)
     {
         this.immunizations = immunizations;
+    }
+
+    public Guardian getGuardian()
+    {
+        return guardian;
+    }
+
+    public void setGuardian(Guardian guardian)
+    {
+        this.guardian = guardian;
     }
 }
 
