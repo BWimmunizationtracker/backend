@@ -1,6 +1,10 @@
 package com.immunizationtracker.immunization.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "wards")
@@ -13,10 +17,17 @@ public class Ward
     private String firstname;
     private String lastname;
 
-    // parentid will be a foreign key
-    // private List<Immunization> immunizations = new ArrayList<>();
 
+    // many to one relationship to Guardian
+    // guardianid will be a foreign key
+
+    //one to many relationship to Immunization
+    // private List<Immunization> immunizations = new ArrayList<>();
     // needs foreign key to Immunization
+
+    @OneToMany(mappedBy = "wards", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("wards")
+    private List<Immunization> immunizations = new ArrayList<>();
 
 
     public Ward()
