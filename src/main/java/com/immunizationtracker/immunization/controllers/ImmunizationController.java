@@ -35,7 +35,7 @@ public class ImmunizationController
     {
         logger.info(request.getMethod() + " " + request.getRequestURI() + " accessed");
 
-        List<Immunization> allImmunizations= immunizationService.findAll();
+        List<Immunization> allImmunizations = immunizationService.findAll();
         return new ResponseEntity<>(allImmunizations, HttpStatus.OK);
 
     }

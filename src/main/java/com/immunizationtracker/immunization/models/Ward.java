@@ -25,7 +25,7 @@ public class Ward
     // private List<Immunization> immunizations = new ArrayList<>();
     // needs foreign key to Immunization
 
-    @OneToMany(mappedBy = "wards", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "ward", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("wards")
     private List<Immunization> immunizations = new ArrayList<>();
 
@@ -34,10 +34,12 @@ public class Ward
     {
     }
 
-    public Ward(String firstname, String lastname)
+    public Ward(String firstname, String lastname, List<Immunization> immunizations)
     {
         this.firstname = firstname;
         this.lastname = lastname;
+        this.immunizations = immunizations;
+
     }
 
 
@@ -70,4 +72,19 @@ public class Ward
     {
         this.lastname = lastname;
     }
+
+    public List<Immunization> getImmunizations()
+    {
+        return immunizations;
+    }
+
+    public void setImmunizations(List<Immunization> immunizations)
+    {
+        this.immunizations = immunizations;
+    }
 }
+
+
+
+
+
