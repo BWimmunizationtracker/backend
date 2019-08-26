@@ -23,7 +23,7 @@ public class Ward
     @ManyToOne
     @JoinColumn(name = "guardianid")
     @JsonIgnoreProperties("wards")
-    private Guardian guardian;
+    private Guardian guardianward;
 
 
     //one to many relationship to Immunization
@@ -39,12 +39,12 @@ public class Ward
     {
     }
 
-    public Ward(String firstname, String lastname, List<Immunization> immunizations, Guardian guardian)
+    public Ward(String firstname, String lastname, List<Immunization> immunizations, Guardian guardianward)
     {
         this.firstname = firstname;
         this.lastname = lastname;
         this.immunizations = immunizations;
-        this.guardian = guardian;
+        this.guardianward = guardianward;
 
     }
 
@@ -89,14 +89,14 @@ public class Ward
         this.immunizations = immunizations;
     }
 
-    public Guardian getGuardian()
+    public Guardian getGuardianward()
     {
-        return guardian;
+        return guardianward;
     }
 
-    public void setGuardian(Guardian guardian)
+    public void setGuardianward(Guardian guardianward)
     {
-        this.guardian = guardian;
+        this.guardianward = guardianward;
     }
 }
 

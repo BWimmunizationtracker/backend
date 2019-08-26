@@ -34,9 +34,13 @@ INSERT INTO doctors (doctorid, doctorname) VALUES (1, 'Mr. Magoo');
 INSERT INTO doctors (doctorid, doctorname) VALUES (2, 'Jiminy Cricket');
 INSERT INTO doctors (doctorid, doctorname) VALUES (3, 'Guy Guyson');
 
-INSERT INTO wards (wardid, firstname, lastname) VALUES (1, 'Drew', 'Vandeberghe');
-INSERT INTO wards (wardid, firstname, lastname) VALUES (2, 'Justin', 'Vandeberghe');
-INSERT INTO wards (wardid, firstname, lastname) VALUES (3, 'Dawn', 'Kleser');
+-- INSERT INTO wards (guardianid, wardid, firstname, lastname) VALUES (1, 1, 'Drew', 'Vandeberghe');
+-- INSERT INTO wards (guardianid, wardid, firstname, lastname) VALUES (1, 2, 'Justin', 'Vandeberghe');
+-- INSERT INTO wards (guardianid, wardid, firstname, lastname) VALUES (2, 3, 'Dawn', 'Kleser');
+
+INSERT INTO wards (guardianid, wardid, firstname, lastname) VALUES (1, 1, 'Drew', 'Vandeberghe');
+INSERT INTO wards (guardianid, wardid, firstname, lastname) VALUES (1, 2, 'Justin', 'Vandeberghe');
+INSERT INTO wards (guardianid, wardid, firstname, lastname) VALUES (2, 3, 'Dawn', 'Kleser');
 
 INSERT INTO immunizations (wardid, immunizationid, date, immunizationname, clinic) VALUES (1, 1, CURRENT_DATE, 'Polio', 'Holy Cross');
 INSERT INTO immunizations (wardid, immunizationid, date, immunizationname, clinic) VALUES (1, 2, CURRENT_DATE, 'Tetanus', 'St. Thomas');
@@ -47,10 +51,9 @@ INSERT INTO permissions (guardianid, doctorid) VALUES (1, 2);
 INSERT INTO permissions (guardianid, doctorid) VALUES (2, 3);
 INSERT INTO permissions (guardianid, doctorid) VALUES (3, 1);
 
--- INSERT INTO immunizationList (guardianid, doctorid) VALUES (1, 1);
--- INSERT INTO immunizationList (guardianid, doctorid) VALUES (1, 2);
--- INSERT INTO immunizationList (guardianid, doctorid) VALUES (2, 3);
--- INSERT INTO immunizationList (guardianid, doctorid) VALUES (3, 1);
+-- INSERT INTO wards (guardianid, wardid) VALUES (1, 1);
+-- INSERT INTO wards (guardianid, wardid) VALUES (1, 2);
+-- INSERT INTO wards (guardianid, wardid) VALUES (2, 3);
 
 
 

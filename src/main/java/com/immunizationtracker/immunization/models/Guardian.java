@@ -21,13 +21,13 @@ public class Guardian extends Auditable
 
     // many:many Guardian:Doctor split up into permissions table
     @OneToMany(mappedBy = "guardian", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("guardians")
+    @JsonIgnoreProperties("guardian")
     private List<Permission> permissions = new ArrayList<>();
 
 //    Guardian will have a one to many relationship to Ward
-    @OneToMany(mappedBy = "guardian", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("guardians")
-    private List<Ward> wards = new ArrayList<>();
+    @OneToMany(mappedBy = "guardianward", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("guardianward")
+    private List<Ward> guardianwards = new ArrayList<>();
 
 //    private List<Child> children = new ArrayList<>();
 
@@ -43,7 +43,7 @@ public class Guardian extends Auditable
     {
         this.firstname = firstname;
         this.lastname = lastname;
-        this.wards = wards;
+        this.guardianwards = wards;
 
         for (Permission p : permissions)
         {
@@ -98,11 +98,11 @@ public class Guardian extends Auditable
 
     public List<Ward> getWards()
     {
-        return wards;
+        return guardianwards;
     }
 
     public void setWards(List<Ward> wards)
     {
-        this.wards = wards;
+        this.guardianwards = wards;
     }
 }
