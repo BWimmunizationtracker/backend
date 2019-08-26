@@ -96,34 +96,18 @@ public class GuardianController
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    // need endpoint to add a doctor to the gavePermissionDoctor ArrayList
-    @PutMapping(value = "/guardian/{guardianid}/doctor/{doctorid}")
+    // need endpoint to add a doctor to the permissions ArrayList
+    @PostMapping(value = "/guardian/{guardianid}/doctor/{doctorid}")
     public ResponseEntity<?> addApprovedDoctor(HttpServletRequest request, @PathVariable long guardianid, @PathVariable long doctorid)
     {
         logger.trace(request.getRequestURI() + " accessed");
         // get guardian and doctor by searching by id
-        Doctor currentDoctor = doctorService.findDoctorById(doctorid);
-        Guardian currentGuardian = guardianService.findGuardianById(guardianid);
 
-        currentDoctor.getPermissions().add(new Permission(currentGuardian, currentDoctor));
-        currentGuardian.getPermissions().add(new Permission(currentGuardian, currentDoctor));
-
-
-        doctorService.update(currentDoctor, doctorid);
-       guardianService.update(currentGuardian, guardianid);
+        doctorService.updatePermissions(doctorid, guardianid);
 
 
 
-
-        // add the doctor to the list of approved doctor on the Guardian object
-
-//        List<Permission> newPermissionList = currentGuardian.getPermissions();
-//        newPermissionList.add(new Permission(currentGuardian, newDoctor));
-//        currentGuardian.setPermissions(newPermissionList);
-//        guardianService.update(currentGuardian, guardianid);
-
-
-        return new ResponseEntity<>(currentDoctor, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
 
     }
 

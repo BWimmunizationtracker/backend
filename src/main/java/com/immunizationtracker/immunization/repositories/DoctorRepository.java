@@ -16,12 +16,8 @@ public interface DoctorRepository extends CrudRepository<Doctor, Long>
 
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO permissions(guardianid, doctorid) values(:guardianid :doctorid)", nativeQuery = true)
+    @Query(value = "INSERT INTO permissions(guardianid, doctorid) values(:guardianid, :doctorid)", nativeQuery = true)
     void insertPermission(long guardianid, long doctorid);
-
-
-//    DELETE FROM permissions WHERE guardianid = :guardianid
-
 
 
 }

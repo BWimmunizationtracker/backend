@@ -42,6 +42,7 @@ INSERT INTO immunizations (immunizationid, date, immunizationname, clinic) VALUE
 INSERT INTO immunizations (immunizationid, date, immunizationname, clinic) VALUES (2, CURRENT_DATE, 'Tetanus', 'St. Thomas');
 INSERT INTO immunizations (immunizationid, date, immunizationname, clinic) VALUES (3, CURRENT_DATE, 'Malaria', 'Sloan Memorial');
 
+INSERT INTO permissions (guardianid, doctorid) VALUES (1, 1);
 INSERT INTO permissions (guardianid, doctorid) VALUES (1, 2);
 INSERT INTO permissions (guardianid, doctorid) VALUES (2, 3);
 INSERT INTO permissions (guardianid, doctorid) VALUES (3, 1);

@@ -16,4 +16,6 @@ public interface DoctorService
     Doctor save(Doctor doctor);
 
     Doctor update(Doctor doctor, long id);
+
+    void updatePermissions(long doctorid, long guardianid);
 }

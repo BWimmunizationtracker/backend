@@ -1,9 +1,11 @@
 package com.immunizationtracker.immunization.service;
 
 import com.immunizationtracker.immunization.models.Doctor;
+import com.immunizationtracker.immunization.models.Guardian;
 import com.immunizationtracker.immunization.models.Permission;
 import com.immunizationtracker.immunization.models.Ward;
 import com.immunizationtracker.immunization.repositories.DoctorRepository;
+import com.immunizationtracker.immunization.repositories.GuardianRepository;
 import com.immunizationtracker.immunization.repositories.WardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +21,13 @@ public class DoctorServiceImpl implements DoctorService
     // We instantiate an instance of the DoctorRepository here
     // so that we have access to the data access object methods
     @Autowired
-    private DoctorRepository doctorRepository;
+private DoctorRepository doctorRepository;
+
+    @Autowired
+    private GuardianRepository guardianRepository;
+
+
+
 
     // next we will implement the methods from our interface
     @Override
@@ -64,11 +72,13 @@ public class DoctorServiceImpl implements DoctorService
         return doctorRepository.save(newDoctor);
     }
 
+    @Transactional
     @Override
     public Doctor update(Doctor doctor, long id)
     {
         Doctor currentDoctor = doctorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
-//
+        Guardian currentGuardian = guardianRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
+
         if (doctor.getPermissions().size() > 0)
         {
             for (Permission permission : doctor.getPermissions())
@@ -79,8 +89,17 @@ public class DoctorServiceImpl implements DoctorService
         }
         throw new EntityNotFoundException(doctor.getName());
 
-//        return null;
+    }
+
+    public void updatePermissions(long doctorid, long guardianid)
+    {
+        Doctor currentDoctor = doctorRepository.findById(doctorid).orElseThrow(() -> new EntityNotFoundException(Long.toString(doctorid)));
+        Guardian currentGuardian = guardianRepository.findById(guardianid).orElseThrow(() -> new EntityNotFoundException(Long.toString(guardianid)));
+
+        doctorRepository.insertPermission(guardianid, doctorid);
 
     }
+
+
 
 }
