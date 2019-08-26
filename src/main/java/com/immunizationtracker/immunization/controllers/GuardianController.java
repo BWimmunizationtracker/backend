@@ -80,7 +80,7 @@ public class GuardianController
 
         // set the location header for the newly created resource
         HttpHeaders responseHeaders = new HttpHeaders();
-        URI newStudentURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{parentid}").buildAndExpand(newGuardian.getParentid()).toUri();
+        URI newStudentURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{parentid}").buildAndExpand(newGuardian.getGuardianid()).toUri();
         responseHeaders.setLocation(newStudentURI);
 
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
@@ -103,8 +103,14 @@ public class GuardianController
         logger.trace(request.getRequestURI() + " accessed");
         // get guardian and doctor by searching by id
         Doctor currentDoctor = doctorService.findDoctorById(doctorid);
-        currentDoctor.getPermissions().add(new Permission(guardianService.findGuardianById(guardianid), currentDoctor));
+        Guardian currentGuardian = guardianService.findGuardianById(guardianid);
+
+        currentDoctor.getPermissions().add(new Permission(currentGuardian, currentDoctor));
+        currentGuardian.getPermissions().add(new Permission(currentGuardian, currentDoctor));
+
+
         doctorService.update(currentDoctor, doctorid);
+       guardianService.update(currentGuardian, guardianid);
 
 
 

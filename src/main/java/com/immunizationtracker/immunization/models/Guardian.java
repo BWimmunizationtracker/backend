@@ -14,7 +14,7 @@ public class Guardian extends Auditable
     // fields - state - values
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long parentid;
+    private long guardianid;
 
     private String firstname;
     private String lastname;
@@ -50,14 +50,14 @@ public class Guardian extends Auditable
 
     // getter and setters
 
-    public long getParentid()
+    public long getGuardianid()
     {
-        return parentid;
+        return guardianid;
     }
 
-    public void setParentid(long parentid)
+    public void setGuardianid(long guardianid)
     {
-        this.parentid = parentid;
+        this.guardianid = guardianid;
     }
 
     public String getFirstname()

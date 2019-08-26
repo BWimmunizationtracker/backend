@@ -9,10 +9,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface DoctorRepository extends CrudRepository<Doctor, Long>
 {
+//    @Transactional
+//    @Modifying
+//    @Query(value = "DELETE FROM permissions WHERE guardianid = :guardianid")
+//    void deletePermissionsByGuardianId(long guardianid);
+
     @Transactional
     @Modifying
-    @Query(value = "DELETE from permissions where guardianid = :guardianid")
-    void deletePermissionsByGuardianId( long guardianid);
+    @Query(value = "INSERT INTO permissions(guardianid, doctorid) values(:guardianid :doctorid)", nativeQuery = true)
+    void insertPermission(long guardianid, long doctorid);
+
+
+//    DELETE FROM permissions WHERE guardianid = :guardianid
+
 
 
 }

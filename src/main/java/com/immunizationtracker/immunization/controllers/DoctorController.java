@@ -71,7 +71,7 @@ public class DoctorController
 
         // set the location header for the newly created resource
         HttpHeaders responseHeaders = new HttpHeaders();
-        URI newDoctorURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{parentid}").buildAndExpand(newDoctor.getDoctorid()).toUri();
+        URI newDoctorURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{doctorid}").buildAndExpand(newDoctor.getDoctorid()).toUri();
         responseHeaders.setLocation(newDoctorURI);
 
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);

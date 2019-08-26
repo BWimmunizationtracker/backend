@@ -90,7 +90,7 @@ public class GuardianServiceImpl implements GuardianService
       }
       if (guardian.getPermissions().size() > 0)
       {
-          doctorRepository.deletePermissionsByGuardianId(currentGuardian.getParentid());
+//          doctorRepository.deletePermissionsByGuardianId(currentGuardian.getGuardianid());
 
           for (Permission p : guardian.getPermissions())
           {

@@ -59,7 +59,6 @@ public class DoctorServiceImpl implements DoctorService
         Doctor newDoctor = new Doctor();
 
         newDoctor.setName(doctor.getName());
-        newDoctor.setPermissions(doctor.getPermissions());
 
 
         return doctorRepository.save(newDoctor);
@@ -69,7 +68,7 @@ public class DoctorServiceImpl implements DoctorService
     public Doctor update(Doctor doctor, long id)
     {
         Doctor currentDoctor = doctorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
-
+//
         if (doctor.getPermissions().size() > 0)
         {
             for (Permission permission : doctor.getPermissions())
@@ -79,6 +78,8 @@ public class DoctorServiceImpl implements DoctorService
             return doctorRepository.save(currentDoctor);
         }
         throw new EntityNotFoundException(doctor.getName());
+
+//        return null;
 
     }
 

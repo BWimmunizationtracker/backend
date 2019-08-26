@@ -26,9 +26,9 @@
 -- INSERT INTO wrote (bookid, authorid) VALUES (5, 4);
 
 
-INSERT INTO guardians (parentid, firstname, lastname) VALUES (1, 'Rory', 'Murray');
-INSERT INTO guardians (parentid, firstname, lastname) VALUES (2, 'Abbey', 'Murray');
-INSERT INTO guardians (parentid, firstname, lastname) VALUES (3, 'Tate', 'Murray');
+INSERT INTO guardians (guardianid, firstname, lastname) VALUES (1, 'Rory', 'Murray');
+INSERT INTO guardians (guardianid, firstname, lastname) VALUES (2, 'Abbey', 'Murray');
+INSERT INTO guardians (guardianid, firstname, lastname) VALUES (3, 'Tate', 'Murray');
 
 INSERT INTO doctors (doctorid, doctorname) VALUES (1, 'Mr. Magoo');
 INSERT INTO doctors (doctorid, doctorname) VALUES (2, 'Jiminy Cricket');
