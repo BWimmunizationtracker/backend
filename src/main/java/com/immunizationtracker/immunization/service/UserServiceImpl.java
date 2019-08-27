@@ -94,10 +94,25 @@ public class UserServiceImpl implements UserDetailsService, UserService
         newUser.setPasswordNoEncrypt(user.getPassword());
 
         ArrayList<UserRoles> newRoles = new ArrayList<>();
-        newRoles.add(new UserRoles(newUser, roleService.findByName("admin")));
+        newRoles.add(new UserRoles(newUser, roleService.findByName("doctor")));
         newUser.setUserRoles(newRoles);
 
         System.out.println(roleService.findByName("admin"));
+        return userrepos.save(newUser);
+    }
+
+    @Transactional
+    @Override
+    public User saveGuardian(User user)
+    {
+        User newUser = new User();
+        newUser.setUsername(user.getUsername());
+        newUser.setPasswordNoEncrypt(user.getPassword());
+
+        ArrayList<UserRoles> newRoles = new ArrayList<>();
+        newRoles.add(new UserRoles(newUser, roleService.findByName("guardian")));
+        newUser.setUserRoles(newRoles);
+        
         return userrepos.save(newUser);
     }
 
