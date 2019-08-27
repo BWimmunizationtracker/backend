@@ -102,6 +102,23 @@ public class UserController
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
     }
 
+    @PostMapping(value = "/userguardian",
+            consumes = {"application/json"},
+            produces = {"application/json"})
+    public ResponseEntity<?> addNewUserGuardian(HttpServletRequest request, @Valid
+    @RequestBody
+            User newuser) throws URISyntaxException
+    {
+        newuser = userService.saveGuardian(newuser);
+
+        // set the location header for the newly created resource
+        HttpHeaders responseHeaders = new HttpHeaders();
+        URI newUserURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{userid}").buildAndExpand(newuser.getUserid()).toUri();
+        responseHeaders.setLocation(newUserURI);
+
+        return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
+    }
+
 
 
     @PutMapping(value = "/user/{id}")
