@@ -15,5 +15,7 @@ public interface UserService
 
     User save(User user);
 
+    User saveDoctor(User user);
+
     User update(User user, long id);
 }

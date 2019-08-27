@@ -1,6 +1,7 @@
 package com.immunizationtracker.immunization.service;
 
 import com.immunizationtracker.immunization.exceptions.ResourceNotFoundException;
+import com.immunizationtracker.immunization.models.Role;
 import com.immunizationtracker.immunization.models.User;
 import com.immunizationtracker.immunization.models.UserRoles;
 import com.immunizationtracker.immunization.repositories.RoleRepository;
@@ -77,6 +78,26 @@ public class UserServiceImpl implements UserDetailsService, UserService
         }
         newUser.setUserRoles(newRoles);
 
+
+        return userrepos.save(newUser);
+    }
+
+    @Transactional
+    @Override
+    public User saveDoctor(User user)
+    {
+        User newUser = new User();
+        newUser.setUsername(user.getUsername());
+        newUser.setPasswordNoEncrypt(user.getPassword());
+
+//        ArrayList<UserRoles> newRoles = new ArrayList<>();
+//        for (UserRoles ur : user.getUserRoles())
+//    {
+//        newRoles.add(new UserRoles(newUser, ur.getRole()));
+//    }
+        ArrayList<UserRoles> newRoles = new ArrayList<>();
+        newRoles.add(new UserRoles(newUser, new Role("admin")));
+        newUser.setUserRoles(newRoles);
 
         return userrepos.save(newUser);
     }
