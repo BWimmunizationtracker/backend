@@ -52,6 +52,10 @@ public class User extends Auditable
 //    {
 //        setUsername(username);
 //        setPassword(password);
+//        ArrayList<UserRoles> newRoles = new ArrayList<>();
+//        newRoles.add(new UserRoles(newUser, roleService.findByName("doctor")));
+//        newUser.setUserRoles(newRoles);
+//        this.userRoles = new Use
 //
 //    }
 
