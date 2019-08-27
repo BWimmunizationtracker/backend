@@ -28,6 +28,9 @@ public class UserServiceImpl implements UserDetailsService, UserService
     @Autowired
     private RoleRepository rolerepos;
 
+    @Autowired
+    private RoleService roleService;
+
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
     {
@@ -90,15 +93,11 @@ public class UserServiceImpl implements UserDetailsService, UserService
         newUser.setUsername(user.getUsername());
         newUser.setPasswordNoEncrypt(user.getPassword());
 
-//        ArrayList<UserRoles> newRoles = new ArrayList<>();
-//        for (UserRoles ur : user.getUserRoles())
-//    {
-//        newRoles.add(new UserRoles(newUser, ur.getRole()));
-//    }
         ArrayList<UserRoles> newRoles = new ArrayList<>();
-        newRoles.add(new UserRoles(newUser, new Role("admin")));
+        newRoles.add(new UserRoles(newUser, roleService.findByName("admin")));
         newUser.setUserRoles(newRoles);
 
+        System.out.println(roleService.findByName("admin"));
         return userrepos.save(newUser);
     }
 

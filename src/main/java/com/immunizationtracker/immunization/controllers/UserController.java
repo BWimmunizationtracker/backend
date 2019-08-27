@@ -84,7 +84,7 @@ public class UserController
 
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
     }
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+
     @PostMapping(value = "/userdoctor",
             consumes = {"application/json"},
             produces = {"application/json"})
@@ -92,8 +92,6 @@ public class UserController
     @RequestBody
             User newuser) throws URISyntaxException
     {
-        logger.trace(request.getMethod().toUpperCase() + " " + request.getRequestURI() + " accessed");
-
         newuser = userService.saveDoctor(newuser);
 
         // set the location header for the newly created resource

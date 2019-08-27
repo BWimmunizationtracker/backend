@@ -39,7 +39,7 @@ public class User extends Auditable
     public User(String username, String password, List<UserRoles> userRoles)
     {
         setUsername(username);
-        setPasswordNoEncrypt(password);
+        setPassword(password);
 
         for (UserRoles ur : userRoles)
         {
@@ -47,16 +47,13 @@ public class User extends Auditable
         }
         this.userRoles = userRoles;
     }
-    public User(String username, String password)
-    {
-        setUsername(username);
 
-        for (UserRoles ur : userRoles)
-        {
-            ur.setUser(this);
-        }
-        this.userRoles = userRoles;
-    }
+//    public User(String username, String password)
+//    {
+//        setUsername(username);
+//        setPassword(password);
+//
+//    }
 
 
     public long getUserid()
