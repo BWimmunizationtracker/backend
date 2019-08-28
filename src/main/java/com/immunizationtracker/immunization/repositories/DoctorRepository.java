@@ -1,7 +1,6 @@
 package com.immunizationtracker.immunization.repositories;
 
 import com.immunizationtracker.immunization.models.Doctor;
-import com.immunizationtracker.immunization.models.Guardian;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

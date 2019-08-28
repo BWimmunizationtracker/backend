@@ -1,10 +1,10 @@
 package com.immunizationtracker.immunization.controllers;
 
-import com.immunizationtracker.immunization.models.*;
+import com.immunizationtracker.immunization.models.Doctor;
+import com.immunizationtracker.immunization.models.ErrorDetail;
+import com.immunizationtracker.immunization.models.User;
 import com.immunizationtracker.immunization.service.DoctorService;
 import com.immunizationtracker.immunization.service.UserService;
-import com.immunizationtracker.immunization.service.WardService;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -17,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.print.Doc;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.net.URI;
@@ -105,7 +104,7 @@ public class DoctorController
         URI newDoctorURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{doctorid}").buildAndExpand(newDoctor.getDoctorid()).toUri();
         responseHeaders.setLocation(newDoctorURI);
 
-        return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
+        return new ResponseEntity<>(newDoctor, responseHeaders, HttpStatus.CREATED);
     }
 
     // update a doctor

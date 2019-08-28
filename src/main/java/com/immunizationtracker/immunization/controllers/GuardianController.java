@@ -1,8 +1,9 @@
 package com.immunizationtracker.immunization.controllers;
 
 
-
-import com.immunizationtracker.immunization.models.*;
+import com.immunizationtracker.immunization.models.Guardian;
+import com.immunizationtracker.immunization.models.User;
+import com.immunizationtracker.immunization.models.Ward;
 import com.immunizationtracker.immunization.service.DoctorService;
 import com.immunizationtracker.immunization.service.GuardianService;
 import com.immunizationtracker.immunization.service.UserService;
@@ -16,13 +17,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.awt.print.Book;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

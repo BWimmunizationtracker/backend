@@ -1,7 +1,6 @@
 package com.immunizationtracker.immunization.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.Parent;
 
 import javax.persistence.*;
 import java.util.ArrayList;

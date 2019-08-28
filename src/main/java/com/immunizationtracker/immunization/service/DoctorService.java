@@ -1,7 +1,6 @@
 package com.immunizationtracker.immunization.service;
 
 import com.immunizationtracker.immunization.models.Doctor;
-import com.immunizationtracker.immunization.models.Ward;
 
 import java.util.List;
 

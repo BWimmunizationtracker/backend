@@ -99,7 +99,7 @@ public class UserController
         URI newUserURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{userid}").buildAndExpand(newuser.getUserid()).toUri();
         responseHeaders.setLocation(newUserURI);
 
-        return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
+        return new ResponseEntity<>(newuser, responseHeaders, HttpStatus.CREATED);
     }
 
     @PostMapping(value = "/userguardian",
@@ -116,7 +116,7 @@ public class UserController
         URI newUserURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{userid}").buildAndExpand(newuser.getUserid()).toUri();
         responseHeaders.setLocation(newUserURI);
 
-        return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
+        return new ResponseEntity<>(newuser, responseHeaders, HttpStatus.CREATED);
     }
 
 

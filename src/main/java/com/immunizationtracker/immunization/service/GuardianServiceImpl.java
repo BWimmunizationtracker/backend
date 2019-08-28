@@ -1,6 +1,6 @@
 package com.immunizationtracker.immunization.service;
 
-import com.immunizationtracker.immunization.models.Doctor;
+import com.immunizationtracker.immunization.exceptions.ResourceNotFoundException;
 import com.immunizationtracker.immunization.models.Guardian;
 import com.immunizationtracker.immunization.models.Permission;
 import com.immunizationtracker.immunization.repositories.DoctorRepository;
@@ -10,7 +10,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,11 +36,11 @@ public class GuardianServiceImpl implements GuardianService
     @Override
     public Guardian findGuardianById(long id)
     {
-        return guardianRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
+        return guardianRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(Long.toString(id)));
     }
 
     @Override
-    public void delete(long id) throws EntityNotFoundException
+    public void delete(long id) throws ResourceNotFoundException
     {
         if (guardianRepository.findById(id).isPresent())
         {
@@ -49,7 +48,7 @@ public class GuardianServiceImpl implements GuardianService
         }
         else
         {
-            throw new EntityNotFoundException(Long.toString(id));
+            throw new ResourceNotFoundException(Long.toString(id));
         }
 
     }
@@ -78,7 +77,7 @@ public class GuardianServiceImpl implements GuardianService
     @Override
     public Guardian update(Guardian guardian, long id)
     {
-      Guardian currentGuardian = guardianRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
+      Guardian currentGuardian = guardianRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(Long.toString(id)));
 
       if (guardian.getFirstname() != null)
       {
@@ -104,7 +103,7 @@ public class GuardianServiceImpl implements GuardianService
 
     public void updateGuardians(long guardianid, String firstname, String lastname, long userid)
     {
-        Guardian currentGuardian = guardianRepository.findById(guardianid).orElseThrow(() -> new EntityNotFoundException(Long.toString(guardianid)));
+        Guardian currentGuardian = guardianRepository.findById(guardianid).orElseThrow(() -> new ResourceNotFoundException(Long.toString(guardianid)));
 
         guardianRepository.insertGuardian(guardianid, firstname, lastname, userid);
 
@@ -114,7 +113,7 @@ public class GuardianServiceImpl implements GuardianService
 
     public void putUserToGuardian(long guardianid, long userid)
     {
-        Guardian currentGuardian = guardianRepository.findById(guardianid).orElseThrow(() -> new EntityNotFoundException(Long.toString(guardianid)));
+        Guardian currentGuardian = guardianRepository.findById(guardianid).orElseThrow(() -> new ResourceNotFoundException(Long.toString(guardianid)));
         guardianRepository.putUserToGuardian(guardianid, userid);
     }
 

@@ -1,7 +1,6 @@
 package com.immunizationtracker.immunization.service;
 
 import com.immunizationtracker.immunization.exceptions.ResourceNotFoundException;
-import com.immunizationtracker.immunization.models.Role;
 import com.immunizationtracker.immunization.models.User;
 import com.immunizationtracker.immunization.models.UserRoles;
 import com.immunizationtracker.immunization.repositories.RoleRepository;

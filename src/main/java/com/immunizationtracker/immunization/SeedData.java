@@ -1,6 +1,5 @@
 package com.immunizationtracker.immunization;
 
-import com.immunizationtracker.immunization.models.Guardian;
 import com.immunizationtracker.immunization.models.Role;
 import com.immunizationtracker.immunization.models.User;
 import com.immunizationtracker.immunization.models.UserRoles;
@@ -11,7 +10,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.security.Guard;
 import java.util.ArrayList;
 
 @Transactional

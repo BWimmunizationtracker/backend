@@ -1,16 +1,14 @@
 package com.immunizationtracker.immunization.service;
 
-import com.immunizationtracker.immunization.models.Guardian;
+import com.immunizationtracker.immunization.exceptions.ResourceNotFoundException;
 import com.immunizationtracker.immunization.models.Immunization;
 import com.immunizationtracker.immunization.models.Ward;
-import com.immunizationtracker.immunization.repositories.GuardianRepository;
 import com.immunizationtracker.immunization.repositories.ImmunizationRepository;
 import com.immunizationtracker.immunization.repositories.WardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,11 +36,11 @@ public class WardServiceImpl implements WardService
     @Override
     public Ward findWardById(long id)
     {
-        return wardRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
+        return wardRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(Long.toString(id)));
     }
 
     @Override
-    public void delete(long id) throws EntityNotFoundException
+    public void delete(long id) throws ResourceNotFoundException
     {
         if (wardRepository.findById(id).isPresent())
         {
@@ -50,7 +48,7 @@ public class WardServiceImpl implements WardService
         }
         else
         {
-            throw new EntityNotFoundException(Long.toString(id));
+            throw new ResourceNotFoundException(Long.toString(id));
         }
 
     }
@@ -70,7 +68,7 @@ public class WardServiceImpl implements WardService
     @Override
     public Ward update(Ward ward, long id)
     {
-        Ward currentWard = wardRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
+        Ward currentWard = wardRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(Long.toString(id)));
 
         if (ward.getFirstname() != null)
         {
@@ -83,13 +81,13 @@ public class WardServiceImpl implements WardService
 
     public void putWardToImmunization(long immunizationid, long wardid)
     {
-        Immunization currentImmunization = immunizationRepository.findById(immunizationid).orElseThrow(() -> new EntityNotFoundException(Long.toString(immunizationid)));
+        Immunization currentImmunization = immunizationRepository.findById(immunizationid).orElseThrow(() -> new ResourceNotFoundException(Long.toString(immunizationid)));
         wardRepository.putWardToImmunization(immunizationid, wardid);
     }
 
     public void putGuardianToWard(long wardid, long guardianid)
     {
-        Ward currentward = wardRepository.findById(guardianid).orElseThrow(() -> new EntityNotFoundException(Long.toString(wardid)));
+        Ward currentward = wardRepository.findById(guardianid).orElseThrow(() -> new ResourceNotFoundException(Long.toString(wardid)));
         wardRepository.putGuardianToWard(wardid, guardianid);
     }
 

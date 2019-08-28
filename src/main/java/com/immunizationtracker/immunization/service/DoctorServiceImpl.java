@@ -1,17 +1,16 @@
 package com.immunizationtracker.immunization.service;
 
+import com.immunizationtracker.immunization.exceptions.ResourceNotFoundException;
 import com.immunizationtracker.immunization.models.Doctor;
 import com.immunizationtracker.immunization.models.Guardian;
 import com.immunizationtracker.immunization.models.Permission;
-import com.immunizationtracker.immunization.models.Ward;
 import com.immunizationtracker.immunization.repositories.DoctorRepository;
 import com.immunizationtracker.immunization.repositories.GuardianRepository;
-import com.immunizationtracker.immunization.repositories.WardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,12 +40,12 @@ private DoctorRepository doctorRepository;
     @Override
     public Doctor findDoctorById(long id)
     {
-        return doctorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
+        return doctorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(Long.toString(id)));
     }
 
 
     @Override
-    public void delete(long id) throws EntityNotFoundException
+    public void delete(long id) throws ResourceNotFoundException
     {
         if (doctorRepository.findById(id).isPresent())
         {
@@ -54,7 +53,7 @@ private DoctorRepository doctorRepository;
         }
         else
         {
-            throw new EntityNotFoundException(Long.toString(id));
+            throw new ResourceNotFoundException(Long.toString(id));
         }
 
 
@@ -76,8 +75,8 @@ private DoctorRepository doctorRepository;
 //    @Override
 //    public Doctor update(Doctor doctor, long id)
 //    {
-//        Doctor currentDoctor = doctorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
-//        Guardian currentGuardian = guardianRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
+//        Doctor currentDoctor = doctorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(Long.toString(id)));
+//        Guardian currentGuardian = guardianRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(Long.toString(id)));
 //
 //        if (doctor.getPermissions().size() > 0)
 //        {
@@ -87,7 +86,7 @@ private DoctorRepository doctorRepository;
 //            }
 //            return doctorRepository.save(currentDoctor);
 //        }
-//        throw new EntityNotFoundException(doctor.getName());
+//        throw new ResourceNotFoundException(doctor.getName());
 //
 //    }
 
@@ -95,7 +94,7 @@ private DoctorRepository doctorRepository;
     @Override
     public Doctor update(Doctor doctor, long id)
     {
-        Doctor currentDoctor = doctorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
+        Doctor currentDoctor = doctorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(Long.toString(id)));
 
         if (doctor.getName() != null)
         {
@@ -118,8 +117,8 @@ private DoctorRepository doctorRepository;
 
         public void updatePermissions(long doctorid, long guardianid)
     {
-        Doctor currentDoctor = doctorRepository.findById(doctorid).orElseThrow(() -> new EntityNotFoundException(Long.toString(doctorid)));
-        Guardian currentGuardian = guardianRepository.findById(guardianid).orElseThrow(() -> new EntityNotFoundException(Long.toString(guardianid)));
+        Doctor currentDoctor = doctorRepository.findById(doctorid).orElseThrow(() -> new ResourceNotFoundException(Long.toString(doctorid)));
+        Guardian currentGuardian = guardianRepository.findById(guardianid).orElseThrow(() -> new ResourceNotFoundException(Long.toString(guardianid)));
 
         doctorRepository.insertPermission(guardianid, doctorid);
 
@@ -127,7 +126,7 @@ private DoctorRepository doctorRepository;
 
     public void putUserToDoctor(long doctorid, long userid)
     {
-        Doctor currentDoctor = doctorRepository.findById(doctorid).orElseThrow(() -> new EntityNotFoundException(Long.toString(doctorid)));
+        Doctor currentDoctor = doctorRepository.findById(doctorid).orElseThrow(() -> new ResourceNotFoundException(Long.toString(doctorid)));
         doctorRepository.putUserToDoctor(doctorid, userid);
     }
 

@@ -1,14 +1,13 @@
 package com.immunizationtracker.immunization.service;
 
+import com.immunizationtracker.immunization.exceptions.ResourceNotFoundException;
 import com.immunizationtracker.immunization.models.Immunization;
-import com.immunizationtracker.immunization.models.Ward;
 import com.immunizationtracker.immunization.repositories.ImmunizationRepository;
-import com.immunizationtracker.immunization.repositories.WardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,11 +31,11 @@ public class ImmunizationServiceImpl implements ImmunizationService
     @Override
     public Immunization findImmunizationById(long id)
     {
-        return immunizationRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
+        return immunizationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(Long.toString(id)));
     }
 
     @Override
-    public void delete(long id) throws EntityNotFoundException
+    public void delete(long id) throws ResourceNotFoundException
     {
         if (immunizationRepository.findById(id).isPresent())
         {
@@ -44,7 +43,7 @@ public class ImmunizationServiceImpl implements ImmunizationService
         }
         else
         {
-            throw new EntityNotFoundException(Long.toString(id));
+            throw new ResourceNotFoundException(Long.toString(id));
         }
 
     }
@@ -66,7 +65,7 @@ public class ImmunizationServiceImpl implements ImmunizationService
     @Override
     public Immunization update(Immunization immunization, long id)
     {
-        Immunization currentImmunization = immunizationRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
+        Immunization currentImmunization = immunizationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(Long.toString(id)));
 
         if (immunization.getImmunizationname() != null)
         {
