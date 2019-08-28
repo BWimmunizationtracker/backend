@@ -95,7 +95,7 @@ public class WardController
 
     // endpoint to add an immunization to the wards list
     @PutMapping(value = "/ward/{wardid}/immunization/{immunizationid}")
-    public ResponseEntity<?> putGuardianToUser(HttpServletRequest request, @PathVariable long wardid, @PathVariable long immunizationid)
+    public ResponseEntity<?> putWardToImmunization(HttpServletRequest request, @PathVariable long wardid, @PathVariable long immunizationid)
     {
         logger.trace(request.getRequestURI() + " accessed");
         // get immunization and ward by searching by id
