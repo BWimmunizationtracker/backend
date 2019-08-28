@@ -2,13 +2,11 @@ package com.immunizationtracker.immunization.controllers;
 
 
 
-import com.immunizationtracker.immunization.models.Doctor;
-import com.immunizationtracker.immunization.models.Guardian;
-import com.immunizationtracker.immunization.models.Permission;
-import com.immunizationtracker.immunization.models.User;
+import com.immunizationtracker.immunization.models.*;
 import com.immunizationtracker.immunization.service.DoctorService;
 import com.immunizationtracker.immunization.service.GuardianService;
 import com.immunizationtracker.immunization.service.UserService;
+import com.immunizationtracker.immunization.service.WardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +40,10 @@ public class GuardianController
 
     @Autowired
     private UserService userService;
+
+
+    @Autowired
+    private WardService wardService;
 
     // get all Guardians
     @GetMapping(value = "/allguardians", produces = {"application/json"})
@@ -163,6 +165,25 @@ public class GuardianController
 
 
         guardianService.putUserToGuardian(guardianid, userid);
+
+
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
+
+    }
+
+    // endpoint to add a ward to the guardians list
+    @PutMapping(value = "/guardian/{guardianid}/ward/{wardid}")
+    public ResponseEntity<?> putGuardianToWard(HttpServletRequest request, @PathVariable long guardianid, @PathVariable long wardid)
+    {
+        logger.trace(request.getRequestURI() + " accessed");
+        // get ward and guardian by searching by id
+        Ward ward = wardService.findWardById(wardid);
+        Guardian guardian = guardianService.findGuardianById(guardianid);
+
+
+
+        wardService.putGuardianToWard(wardid, guardianid);
 
 
 
