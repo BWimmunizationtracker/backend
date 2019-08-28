@@ -21,7 +21,7 @@ public interface DoctorRepository extends CrudRepository<Doctor, Long>
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE doctors SET userid = :userid WHERE guardianid = :guardianid", nativeQuery = true)
+    @Query(value = "UPDATE doctors SET userid = :userid WHERE guardianid = :doctorid", nativeQuery = true)
     void putUserToDoctor(long doctorid, long userid);
 
 //    @Transactional
