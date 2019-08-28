@@ -112,7 +112,11 @@ public class GuardianServiceImpl implements GuardianService
 
     }
 
-    
+    public void putUserToGuardian(long guardianid, long userid)
+    {
+        Guardian currentGuardian = guardianRepository.findById(guardianid).orElseThrow(() -> new EntityNotFoundException(Long.toString(guardianid)));
+        guardianRepository.putUserToGuardian(guardianid, userid);
+    }
 
 
 
