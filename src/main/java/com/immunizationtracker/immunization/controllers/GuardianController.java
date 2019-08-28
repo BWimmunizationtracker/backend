@@ -5,8 +5,10 @@ package com.immunizationtracker.immunization.controllers;
 import com.immunizationtracker.immunization.models.Doctor;
 import com.immunizationtracker.immunization.models.Guardian;
 import com.immunizationtracker.immunization.models.Permission;
+import com.immunizationtracker.immunization.models.User;
 import com.immunizationtracker.immunization.service.DoctorService;
 import com.immunizationtracker.immunization.service.GuardianService;
+import com.immunizationtracker.immunization.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,9 @@ public class GuardianController
 
     @Autowired
     private DoctorService doctorService;
+
+    @Autowired
+    private UserService userService;
 
     // get all Guardians
     @GetMapping(value = "/allguardians", produces = {"application/json"})
@@ -120,6 +125,25 @@ public class GuardianController
         // get guardian and doctor by searching by id
 
         doctorService.updatePermissions(doctorid, guardianid);
+
+
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
+
+    }
+
+    // endpoint to add a guardian to the users list
+    @PostMapping(value = "/guardian/{guardianid}/user/{userid}")
+    public ResponseEntity<?> addGuardianToUser(HttpServletRequest request, @PathVariable long guardianid, @PathVariable long userid)
+    {
+        logger.trace(request.getRequestURI() + " accessed");
+        // get guardian and user by searching by id
+        Guardian guardian = guardianService.findGuardianById(guardianid);
+        User user = userService.findUserById(userid);
+
+
+
+        guardianService.updateGuardians(guardian.getGuardianid(), guardian.getFirstname(), guardian.getLastname(), userid);
 
 
 
