@@ -16,5 +16,7 @@ public interface GuardianService
 
     Guardian update(Guardian guardian, long id);
 
+    void updateGuardians(long guardianid, String firstname, String lastname, long userid);
+
 
 }
