@@ -87,5 +87,7 @@ public class WardServiceImpl implements WardService
         wardRepository.putWardToImmunization(immunizationid, wardid);
     }
 
+    
+
 }
 

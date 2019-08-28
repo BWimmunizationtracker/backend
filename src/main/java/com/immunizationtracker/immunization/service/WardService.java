@@ -18,4 +18,6 @@ public interface WardService
     Ward update(Ward ward, long id);
 
     void putWardToImmunization(long immunizationid, long wardid);
+
+    void putGuardianToWard(long wardid, long guardianid);
 }
