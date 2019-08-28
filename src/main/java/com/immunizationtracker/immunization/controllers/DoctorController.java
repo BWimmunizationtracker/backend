@@ -95,7 +95,7 @@ public class DoctorController
 
     // endpoint to add a doctor to the users list
     @PutMapping(value = "/doctor/{doctorid}/user/{userid}")
-    public ResponseEntity<?> putGuardianToUser(HttpServletRequest request, @PathVariable long doctorid, @PathVariable long userid)
+    public ResponseEntity<?> putDoctorToUser(HttpServletRequest request, @PathVariable long doctorid, @PathVariable long userid)
     {
         logger.trace(request.getRequestURI() + " accessed");
         // get guardian and user by searching by id

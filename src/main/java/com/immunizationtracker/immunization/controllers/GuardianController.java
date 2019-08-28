@@ -145,7 +145,7 @@ public class GuardianController
 
 
 
-        guardianService.updateGuardians(guardian.getGuardianid(), guardian.getFirstname(), guardian.getLastname(), userid);
+        guardianService.putUserToGuardian(guardianid, userid);
 
 
 
