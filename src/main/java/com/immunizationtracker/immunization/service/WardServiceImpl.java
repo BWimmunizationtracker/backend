@@ -83,7 +83,7 @@ public class WardServiceImpl implements WardService
 
     public void putWardToImmunization(long immunizationid, long wardid)
     {
-        Immunization currentImmunization = immunizationRepository.findById(immunizationid).orElseThrow(() -> new EntityNotFoundException(Long.toString(immunizationidid)));
+        Immunization currentImmunization = immunizationRepository.findById(immunizationid).orElseThrow(() -> new EntityNotFoundException(Long.toString(immunizationid)));
         wardRepository.putWardToImmunization(immunizationid, wardid);
     }
 

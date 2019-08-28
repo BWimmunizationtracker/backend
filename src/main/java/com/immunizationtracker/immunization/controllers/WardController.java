@@ -1,8 +1,11 @@
 package com.immunizationtracker.immunization.controllers;
 
 import com.immunizationtracker.immunization.models.Guardian;
+import com.immunizationtracker.immunization.models.Immunization;
+import com.immunizationtracker.immunization.models.User;
 import com.immunizationtracker.immunization.models.Ward;
 import com.immunizationtracker.immunization.service.GuardianService;
+import com.immunizationtracker.immunization.service.ImmunizationService;
 import com.immunizationtracker.immunization.service.WardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +31,9 @@ public class WardController
 
     @Autowired
     private WardService wardService;
+
+    @Autowired
+    private ImmunizationService immunizationService;
 
     // get all Wards
     @GetMapping(value = "/allwards", produces = {"application/json"})
@@ -85,6 +91,25 @@ public class WardController
 
         wardService.update(updateWard, wardid);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    // endpoint to add an immunization to the wards list
+    @PutMapping(value = "/wards/{wardid}/immunization/{immunizationid}")
+    public ResponseEntity<?> putGuardianToUser(HttpServletRequest request, @PathVariable long wardid, @PathVariable long immunizationid)
+    {
+        logger.trace(request.getRequestURI() + " accessed");
+        // get immunization and ward by searching by id
+        Immunization immunization = immunizationService.findImmunizationById(immunizationid);
+        Ward ward = wardService.findWardById(wardid);
+
+
+
+        wardService.putWardToImmunization(immunizationid, wardid);
+
+
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
+
     }
 
 }
