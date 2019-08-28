@@ -1,14 +1,13 @@
 package com.immunizationtracker.immunization.controllers;
 
-import com.immunizationtracker.immunization.models.Doctor;
-import com.immunizationtracker.immunization.models.Guardian;
-import com.immunizationtracker.immunization.models.User;
-import com.immunizationtracker.immunization.models.Ward;
+import com.immunizationtracker.immunization.models.*;
 import com.immunizationtracker.immunization.service.DoctorService;
 import com.immunizationtracker.immunization.service.UserService;
 import com.immunizationtracker.immunization.service.WardService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +39,11 @@ public class DoctorController
 
     // get all Doctors
     @ApiOperation(value = "Get all doctors")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Retrieved all doctors", response = void.class),
+            @ApiResponse(code=404,message="Doctors not found", response = ErrorDetail.class),
+            @ApiResponse(code = 500, message = "Error finding doctors", response = ErrorDetail.class)
+    })
     @GetMapping(value = "/alldoctors", produces = {"application/json"})
     public ResponseEntity<?> listAllDoctors(HttpServletRequest request)
     {
@@ -51,6 +55,12 @@ public class DoctorController
     }
 
     // get Doctor by id
+    @ApiOperation(value = "Get doctor by id")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Doctor found", response = void.class),
+            @ApiResponse(code=404,message="Doctor not found", response = ErrorDetail.class),
+            @ApiResponse(code = 500, message = "Error finding doctor", response = ErrorDetail.class)
+    })
     @GetMapping(value = "/doctor/{doctorid}", produces = {"application/json"})
     public ResponseEntity<?> getDoctorById(@PathVariable long doctorid, HttpServletRequest request)
     {
@@ -61,6 +71,12 @@ public class DoctorController
     }
 
     // delete Doctor by id
+    @ApiOperation(value = "Delete doctor by id")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Doctor deleted", response = void.class),
+            @ApiResponse(code=404,message="Doctor not found", response = ErrorDetail.class),
+            @ApiResponse(code = 500, message = "Error deleting doctor", response = ErrorDetail.class)
+    })
     @DeleteMapping("/doctor/{doctorid}")
     public ResponseEntity<?> deleteDoctorById(@PathVariable long doctorid, HttpServletRequest request)
     {
@@ -71,6 +87,12 @@ public class DoctorController
     }
 
     // add a new doctor
+    @ApiOperation(value = "Onboard a new doctor ")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Doctor onboarded", response = void.class),
+            @ApiResponse(code=404, message="Doctor not onboarded", response = ErrorDetail.class),
+            @ApiResponse(code = 500, message = "Error onboarding doctor", response = ErrorDetail.class)
+    })
     @PostMapping(value = "/doctor", consumes = {"application/json"}, produces = {"application/json"})
     public ResponseEntity<?> addNewDoctor(@Valid @RequestBody Doctor newDoctor, HttpServletRequest request) throws URISyntaxException
     {
@@ -87,6 +109,12 @@ public class DoctorController
     }
 
     // update a doctor
+    @ApiOperation(value = "Update a new doctor by id")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Doctor updated", response = void.class),
+            @ApiResponse(code=404, message="Doctor not found", response = ErrorDetail.class),
+            @ApiResponse(code = 500, message = "Error updating doctor", response = ErrorDetail.class)
+    })
     @PutMapping(value = "/doctor/{doctorid}", consumes = {"application/json"}, produces = {"application/json"})
     public ResponseEntity<?> updateDoctorById(@RequestBody Doctor updateDoctor, @PathVariable long doctorid, HttpServletRequest request)
     {
@@ -97,6 +125,12 @@ public class DoctorController
     }
 
     // endpoint to add a doctor to the users list
+    @ApiOperation(value = "Add Doctor to User profile by id")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Doctor added to User", response = void.class),
+            @ApiResponse(code=404, message="Doctor not found", response = ErrorDetail.class),
+            @ApiResponse(code = 500, message = "Error adding Doctor to User", response = ErrorDetail.class)
+    })
     @PutMapping(value = "/doctor/{doctorid}/user/{userid}")
     public ResponseEntity<?> putDoctorToUser(HttpServletRequest request, @PathVariable long doctorid, @PathVariable long userid)
     {
