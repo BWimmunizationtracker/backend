@@ -16,4 +16,6 @@ public interface WardService
     Ward save(Ward ward);
 
     Ward update(Ward ward, long id);
+
+    void putWardToImmunization(long immunizationid, long wardid);
 }

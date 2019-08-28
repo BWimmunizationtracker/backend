@@ -1,8 +1,10 @@
 package com.immunizationtracker.immunization.service;
 
 import com.immunizationtracker.immunization.models.Guardian;
+import com.immunizationtracker.immunization.models.Immunization;
 import com.immunizationtracker.immunization.models.Ward;
 import com.immunizationtracker.immunization.repositories.GuardianRepository;
+import com.immunizationtracker.immunization.repositories.ImmunizationRepository;
 import com.immunizationtracker.immunization.repositories.WardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,10 @@ public class WardServiceImpl implements WardService
     // so that we have access to the data access object methods
     @Autowired
     private WardRepository wardRepository;
+
+    @Autowired
+    private ImmunizationRepository immunizationRepository;
+
 
     // next we will implement the methods from our interface
     @Override
@@ -73,6 +79,12 @@ public class WardServiceImpl implements WardService
         }
         return wardRepository.save(currentWard);
 
+    }
+
+    public void putWardToImmunization(long immunizationid, long wardid)
+    {
+        Immunization currentImmunization = immunizationRepository.findById(immunizationid).orElseThrow(() -> new EntityNotFoundException(Long.toString(immunizationidid)));
+        wardRepository.putWardToImmunization(immunizationid, wardid);
     }
 
 }
