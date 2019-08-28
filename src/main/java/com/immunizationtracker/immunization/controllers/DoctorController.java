@@ -1,8 +1,11 @@
 package com.immunizationtracker.immunization.controllers;
 
 import com.immunizationtracker.immunization.models.Doctor;
+import com.immunizationtracker.immunization.models.Guardian;
+import com.immunizationtracker.immunization.models.User;
 import com.immunizationtracker.immunization.models.Ward;
 import com.immunizationtracker.immunization.service.DoctorService;
+import com.immunizationtracker.immunization.service.UserService;
 import com.immunizationtracker.immunization.service.WardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +32,9 @@ public class DoctorController
 
     @Autowired
     private DoctorService doctorService;
+
+    @Autowired
+    private UserService userService;
 
     // get all Doctors
     @GetMapping(value = "/alldoctors", produces = {"application/json"})
@@ -85,6 +91,25 @@ public class DoctorController
 
         doctorService.update(updateDoctor, doctorid);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    // endpoint to add a doctor to the users list
+    @PutMapping(value = "/doctor/{doctorid}/user/{userid}")
+    public ResponseEntity<?> putGuardianToUser(HttpServletRequest request, @PathVariable long doctorid, @PathVariable long userid)
+    {
+        logger.trace(request.getRequestURI() + " accessed");
+        // get guardian and user by searching by id
+        Doctor doctor = doctorService.findDoctorById(doctorid);
+        User user = userService.findUserById(userid);
+
+
+
+        doctorService.putUserToDoctor(doctorid, userid);
+
+
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
+
     }
 
 }
