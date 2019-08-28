@@ -22,6 +22,13 @@ public class Doctor extends Auditable
     @JsonIgnoreProperties("doctors")
     private List<Permission> permissions = new ArrayList<>();
 
+    // many to one relationship to User
+    // userid will be a foreign key
+    @ManyToOne
+    @JoinColumn(name = "userid")
+    @JsonIgnoreProperties("userDoctors")
+    private User user;
+
 
     public Doctor()
     {
@@ -32,6 +39,12 @@ public class Doctor extends Auditable
     public Doctor(String name)
     {
         this.doctorname = name;
+    }
+
+    public Doctor(String name, User user)
+    {
+        this.doctorname = name;
+        this.user = user;
     }
 
     public long getDoctorid()
@@ -62,5 +75,15 @@ public class Doctor extends Auditable
     public void setPermissions(List<Permission> permissions)
     {
         this.permissions = permissions;
+    }
+
+    public User getUser()
+    {
+        return user;
+    }
+
+    public void setUser(User user)
+    {
+        this.user = user;
     }
 }

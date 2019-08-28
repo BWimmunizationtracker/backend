@@ -77,6 +77,20 @@ public class User extends Auditable
         this.userGuardians = userGuardians;
     }
 
+    public User(String username, String password, List<UserRoles> userRoles, List<Guardian> userGuardians, List<Doctor> userDoctors)
+    {
+        setUsername(username);
+        setPassword(password);
+
+        for (UserRoles ur : userRoles)
+        {
+            ur.setUser(this);
+        }
+        this.userRoles = userRoles;
+        this.userGuardians = userGuardians;
+        this.userDoctors = userDoctors;
+    }
+
 //    public User(String username, String password)
 //    {
 //        setUsername(username);
@@ -156,5 +170,15 @@ public class User extends Auditable
     public void setUserGuardians(List<Guardian> userGuardians)
     {
         this.userGuardians = userGuardians;
+    }
+
+    public List<Doctor> getUserDoctors()
+    {
+        return userDoctors;
+    }
+
+    public void setUserDoctors(List<Doctor> userDoctors)
+    {
+        this.userDoctors = userDoctors;
     }
 }
