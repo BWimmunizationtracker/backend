@@ -36,8 +36,6 @@ public class Guardian extends Auditable
     @JsonIgnoreProperties("userGuardians")
     private User user;
 
-//    private List<Child> children = new ArrayList<>();
-
     // create base constructor
 
     public Guardian()

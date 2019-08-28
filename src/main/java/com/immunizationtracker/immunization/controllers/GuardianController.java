@@ -70,6 +70,22 @@ public class GuardianController
 
     }
 
+//    // add a new guardian
+//    @PostMapping(value = "/guardian")
+//    public ResponseEntity<?> addNewGuardian(@Valid @RequestBody Guardian newGuardian, HttpServletRequest request) throws URISyntaxException
+//    {
+//        logger.info(request.getMethod() + " " + request.getRequestURI() + " accessed");
+//
+//        newGuardian = guardianService.save(newGuardian);
+//
+//        // set the location header for the newly created resource
+//        HttpHeaders responseHeaders = new HttpHeaders();
+//        URI newStudentURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{guardianid}").buildAndExpand(newGuardian.getGuardianid()).toUri();
+//        responseHeaders.setLocation(newStudentURI);
+//
+//        return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
+//    }
+
     // add a new guardian
     @PostMapping(value = "/guardian")
     public ResponseEntity<?> addNewGuardian(@Valid @RequestBody Guardian newGuardian, HttpServletRequest request) throws URISyntaxException

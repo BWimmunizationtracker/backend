@@ -26,6 +26,10 @@
 -- INSERT INTO wrote (bookid, authorid) VALUES (5, 4);
 
 
+-- INSERT INTO guardians (guardianid, firstname, lastname, userid) VALUES (1, 'Rory', 'Murray', 31);
+-- INSERT INTO guardians (guardianid, firstname, lastname, userid) VALUES (2, 'Abbey', 'Murray', 32);
+-- INSERT INTO guardians (guardianid, firstname, lastname, userid) VALUES (3, 'Tate', 'Murray', 33);
+
 INSERT INTO guardians (guardianid, firstname, lastname) VALUES (1, 'Rory', 'Murray');
 INSERT INTO guardians (guardianid, firstname, lastname) VALUES (2, 'Abbey', 'Murray');
 INSERT INTO guardians (guardianid, firstname, lastname) VALUES (3, 'Tate', 'Murray');
@@ -50,6 +54,10 @@ INSERT INTO permissions (guardianid, doctorid) VALUES (1, 1);
 INSERT INTO permissions (guardianid, doctorid) VALUES (1, 2);
 INSERT INTO permissions (guardianid, doctorid) VALUES (2, 3);
 INSERT INTO permissions (guardianid, doctorid) VALUES (3, 1);
+
+-- INSERT INTO userGuardians (guardianid, firstname, lastname) VALUES (1, 'Rory', 'Murray', 31);
+-- INSERT INTO userGuardians (guardianid, firstname, lastname) VALUES (2, 'Abbey', 'Murray', 32);
+-- INSERT INTO usdGuardians (guardianid, firstname, lastname) VALUES (3, 'Tate', 'Murray', 33);
 
 -- INSERT INTO wards (guardianid, wardid) VALUES (1, 1);
 -- INSERT INTO wards (guardianid, wardid) VALUES (1, 2);
