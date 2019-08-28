@@ -7,6 +7,8 @@ import com.immunizationtracker.immunization.models.Ward;
 import com.immunizationtracker.immunization.service.DoctorService;
 import com.immunizationtracker.immunization.service.UserService;
 import com.immunizationtracker.immunization.service.WardService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,7 @@ public class DoctorController
     private UserService userService;
 
     // get all Doctors
+    @ApiOperation(value = "Get all doctors")
     @GetMapping(value = "/alldoctors", produces = {"application/json"})
     public ResponseEntity<?> listAllDoctors(HttpServletRequest request)
     {
@@ -68,7 +71,7 @@ public class DoctorController
     }
 
     // add a new doctor
-    @PostMapping(value = "/doctor")
+    @PostMapping(value = "/doctor", consumes = {"application/json"}, produces = {"application/json"})
     public ResponseEntity<?> addNewDoctor(@Valid @RequestBody Doctor newDoctor, HttpServletRequest request) throws URISyntaxException
     {
         logger.info(request.getMethod() + " " + request.getRequestURI() + " accessed");
@@ -84,7 +87,7 @@ public class DoctorController
     }
 
     // update a doctor
-    @PutMapping(value = "/doctor/{doctorid}")
+    @PutMapping(value = "/doctor/{doctorid}", consumes = {"application/json"}, produces = {"application/json"})
     public ResponseEntity<?> updateDoctorById(@RequestBody Doctor updateDoctor, @PathVariable long doctorid, HttpServletRequest request)
     {
         logger.info(request.getMethod() + " " + request.getRequestURI() + " accessed");
