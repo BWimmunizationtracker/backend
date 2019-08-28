@@ -1,5 +1,6 @@
 package com.immunizationtracker.immunization;
 
+import com.immunizationtracker.immunization.models.Guardian;
 import com.immunizationtracker.immunization.models.Role;
 import com.immunizationtracker.immunization.models.User;
 import com.immunizationtracker.immunization.models.UserRoles;
@@ -10,6 +11,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.Guard;
 import java.util.ArrayList;
 
 @Transactional
@@ -39,6 +41,7 @@ public class SeedData implements CommandLineRunner
         roleService.save(r5);
 
         // admin, data, user
+//        ArrayList<Guardian> userGuardians = new ArrayList<>();
         ArrayList<UserRoles> admins = new ArrayList<>();
         admins.add(new UserRoles(new User(), r1));
         admins.add(new UserRoles(new User(), r2));

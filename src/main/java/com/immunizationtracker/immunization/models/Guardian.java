@@ -29,6 +29,13 @@ public class Guardian extends Auditable
     @JsonIgnoreProperties("guardianward")
     private List<Ward> guardianwards = new ArrayList<>();
 
+    // many to one relationship to User
+    // userid will be a foreign key
+    @ManyToOne
+    @JoinColumn(name = "userid")
+    @JsonIgnoreProperties("userGuardians")
+    private User user;
+
 //    private List<Child> children = new ArrayList<>();
 
     // create base constructor
@@ -51,6 +58,21 @@ public class Guardian extends Auditable
         }
 
         this.permissions = permissions;
+    }
+
+    public Guardian(String firstname, String lastname, List<Permission> permissions, List<Ward> wards, User user)
+    {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.guardianwards = wards;
+
+        for (Permission p : permissions)
+        {
+            p.setGuardian(this);
+        }
+
+        this.permissions = permissions;
+        this.user = user;
     }
 
 
@@ -104,5 +126,16 @@ public class Guardian extends Auditable
     public void setWards(List<Ward> wards)
     {
         this.guardianwards = wards;
+    }
+
+
+    public User getUser()
+    {
+        return user;
+    }
+
+    public void setUser(User user)
+    {
+        this.user = user;
     }
 }

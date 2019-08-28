@@ -27,10 +27,19 @@ public class User extends Auditable
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
+    //one to many relationship to UserRoles
+
     @OneToMany(mappedBy = "user",
             cascade = CascadeType.ALL)
     @JsonIgnoreProperties("user")
     private List<UserRoles> userRoles = new ArrayList<>();
+
+    // one to many relationship to Guardian
+
+    @OneToMany(mappedBy = "user",
+            cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("user")
+    private List<Guardian> userGuardians = new ArrayList<>();
 
     public User()
     {
@@ -46,6 +55,19 @@ public class User extends Auditable
             ur.setUser(this);
         }
         this.userRoles = userRoles;
+    }
+
+    public User(String username, String password, List<UserRoles> userRoles, List<Guardian> userGuardians)
+    {
+        setUsername(username);
+        setPassword(password);
+
+        for (UserRoles ur : userRoles)
+        {
+            ur.setUser(this);
+        }
+        this.userRoles = userRoles;
+        this.userGuardians = userGuardians;
     }
 
 //    public User(String username, String password)
@@ -117,5 +139,15 @@ public class User extends Auditable
         }
 
         return rtnList;
+    }
+
+    public List<Guardian> getUserGuardians()
+    {
+        return userGuardians;
+    }
+
+    public void setUserGuardians(List<Guardian> userGuardians)
+    {
+        this.userGuardians = userGuardians;
     }
 }

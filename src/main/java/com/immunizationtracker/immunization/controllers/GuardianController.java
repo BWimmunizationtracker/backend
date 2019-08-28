@@ -80,7 +80,7 @@ public class GuardianController
 
         // set the location header for the newly created resource
         HttpHeaders responseHeaders = new HttpHeaders();
-        URI newStudentURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{parentid}").buildAndExpand(newGuardian.getGuardianid()).toUri();
+        URI newStudentURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{guardianid}").buildAndExpand(newGuardian.getGuardianid()).toUri();
         responseHeaders.setLocation(newStudentURI);
 
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
