@@ -151,6 +151,25 @@ public class GuardianController
 
     }
 
+    // endpoint to add a guardian to the users list
+    @PutMapping(value = "/guardian/{guardianid}/user/{userid}")
+    public ResponseEntity<?> putGuardianToUser(HttpServletRequest request, @PathVariable long guardianid, @PathVariable long userid)
+    {
+        logger.trace(request.getRequestURI() + " accessed");
+        // get guardian and user by searching by id
+        Guardian guardian = guardianService.findGuardianById(guardianid);
+        User user = userService.findUserById(userid);
+
+
+
+        guardianService.putUserToGuardian(guardianid, userid);
+
+
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
+
+    }
+
 
 
 
