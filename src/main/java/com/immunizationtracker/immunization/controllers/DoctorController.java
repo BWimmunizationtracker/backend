@@ -106,8 +106,6 @@ public class DoctorController
 
         doctorService.putUserToDoctor(doctorid, userid);
 
-
-
         return new ResponseEntity<>(HttpStatus.CREATED);
 
     }
