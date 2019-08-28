@@ -13,4 +13,11 @@ public interface WardRepository extends CrudRepository<Ward, Long>
     @Modifying
     @Query(value = "UPDATE immunizations SET wardid = :wardid WHERE immunizationid = :immunizationid", nativeQuery = true)
     void putWardToImmunization(long immunizationid, long wardid);
+
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE wards SET guardianid = :guardianid WHERE wardid = :wardid", nativeQuery = true)
+    void putGuardianToWard(long wardid, long guardianid);
+
+
 }

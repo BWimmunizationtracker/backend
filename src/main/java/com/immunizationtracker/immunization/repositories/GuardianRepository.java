@@ -20,7 +20,18 @@ public interface GuardianRepository extends CrudRepository<Guardian, Long>
     @Modifying
     @Query(value = "UPDATE guardians SET userid = :userid WHERE guardianid = :guardianid", nativeQuery = true)
     void putUserToGuardian(long guardianid, long userid);
+
+
+
 }
+
+
+
+
+
+
+
+
 
 //    INSERT INTO guardians(guardianid, firstname, lastname, userid) VALUES (:guardianid, :firstname, :lastname, :userid)
 
