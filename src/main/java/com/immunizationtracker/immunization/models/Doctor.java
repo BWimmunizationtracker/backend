@@ -39,6 +39,7 @@ public class Doctor extends Auditable
     public Doctor(String name)
     {
         this.doctorname = name;
+        this.user = user;
     }
 
     public Doctor(String name, User user)

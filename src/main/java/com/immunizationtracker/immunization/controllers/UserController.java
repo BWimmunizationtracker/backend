@@ -121,16 +121,16 @@ public class UserController
 
 
 
-    @PutMapping(value = "/user/{id}")
+    @PutMapping(value = "/user/{userid}")
     public ResponseEntity<?> updateUser(HttpServletRequest request,
                                         @RequestBody
                                                 User updateUser,
                                         @PathVariable
-                                                long id)
+                                                long userid)
     {
         logger.trace(request.getMethod().toUpperCase() + " " + request.getRequestURI() + " accessed");
 
-        userService.update(updateUser, id);
+        userService.update(updateUser, userid);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

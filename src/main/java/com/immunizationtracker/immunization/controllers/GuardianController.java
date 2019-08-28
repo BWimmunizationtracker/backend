@@ -174,7 +174,7 @@ public class GuardianController
 
     // endpoint to add a ward to the guardians list
     @PutMapping(value = "/guardian/{guardianid}/ward/{wardid}")
-    public ResponseEntity<?> putGuardianToWard(HttpServletRequest request, @PathVariable long guardianid, @PathVariable long wardid)
+    public ResponseEntity<?> putGuardianToWard(HttpServletRequest request, @PathVariable long wardid, @PathVariable long guardianid)
     {
         logger.trace(request.getRequestURI() + " accessed");
         // get ward and guardian by searching by id

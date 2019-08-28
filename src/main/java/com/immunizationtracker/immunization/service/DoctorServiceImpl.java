@@ -72,26 +72,51 @@ private DoctorRepository doctorRepository;
         return doctorRepository.save(newDoctor);
     }
 
+//    @Transactional
+//    @Override
+//    public Doctor update(Doctor doctor, long id)
+//    {
+//        Doctor currentDoctor = doctorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
+//        Guardian currentGuardian = guardianRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
+//
+//        if (doctor.getPermissions().size() > 0)
+//        {
+//            for (Permission permission : doctor.getPermissions())
+//            {
+//                currentDoctor.getPermissions().add(new Permission(permission.getGuardian(), currentDoctor));
+//            }
+//            return doctorRepository.save(currentDoctor);
+//        }
+//        throw new EntityNotFoundException(doctor.getName());
+//
+//    }
+
     @Transactional
     @Override
     public Doctor update(Doctor doctor, long id)
     {
         Doctor currentDoctor = doctorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
-        Guardian currentGuardian = guardianRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
 
+        if (doctor.getName() != null)
+        {
+            currentDoctor.setName(doctor.getName());
+        }
         if (doctor.getPermissions().size() > 0)
         {
-            for (Permission permission : doctor.getPermissions())
-            {
-                currentDoctor.getPermissions().add(new Permission(permission.getGuardian(), currentDoctor));
-            }
-            return doctorRepository.save(currentDoctor);
-        }
-        throw new EntityNotFoundException(doctor.getName());
+//          doctorRepository.deletePermissionsByGuardianId(currentGuardian.getGuardianid());
 
+            for (Permission p : doctor.getPermissions())
+            {
+                doctorRepository.insertPermission(p.getGuardian().getGuardianid(), id);
+            }
+        }
+
+        return doctorRepository.save(currentDoctor);
     }
 
-    public void updatePermissions(long doctorid, long guardianid)
+
+
+        public void updatePermissions(long doctorid, long guardianid)
     {
         Doctor currentDoctor = doctorRepository.findById(doctorid).orElseThrow(() -> new EntityNotFoundException(Long.toString(doctorid)));
         Guardian currentGuardian = guardianRepository.findById(guardianid).orElseThrow(() -> new EntityNotFoundException(Long.toString(guardianid)));
