@@ -18,4 +18,6 @@ public interface DoctorService
     Doctor update(Doctor doctor, long id);
 
     void updatePermissions(long doctorid, long guardianid);
+
+    void putUserToGuardian(long doctorid, long userid);
 }
