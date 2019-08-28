@@ -41,6 +41,13 @@ public class User extends Auditable
     @JsonIgnoreProperties("user")
     private List<Guardian> userGuardians = new ArrayList<>();
 
+    // one to many relationship to Doctor
+
+    @OneToMany(mappedBy = "user",
+            cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("user")
+    private List<Doctor> userDoctors = new ArrayList<>();
+
     public User()
     {
     }

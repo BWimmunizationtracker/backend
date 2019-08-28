@@ -20,5 +20,4 @@ public interface GuardianService
 
     void putUserToGuardian(long guardianid, long userid);
 
-
 }
