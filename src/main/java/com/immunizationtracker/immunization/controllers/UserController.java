@@ -1,7 +1,11 @@
 package com.immunizationtracker.immunization.controllers;
 
+import com.immunizationtracker.immunization.models.ErrorDetail;
 import com.immunizationtracker.immunization.models.User;
 import com.immunizationtracker.immunization.service.UserService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +41,23 @@ public class UserController
 
         List<User> myUsers = userService.findAll();
         return new ResponseEntity<>(myUsers, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Retrieves the current logged in user",
+            response = User.class)
+    @ApiResponses({@ApiResponse(code = 200,
+            message = "User found",
+            response = User.class), @ApiResponse(code = 404,
+            message = "User not found",
+            response = ErrorDetail.class)})
+    @PreAuthorize("hasAuthority('ROLE_STUDENT')")
+    @GetMapping(value = "/user",
+            produces = {"application/json"})
+    public ResponseEntity<?> retrieveCurrentUser(HttpServletRequest request, Authentication authentication)
+    {
+        logger.info(request.getMethod() + " " + request.getRequestURI() + " accessed");
+        User currentUser = userService.findUserByUsername(authentication.getName());
+        return new ResponseEntity<>(currentUser, HttpStatus.OK);
     }
 
 

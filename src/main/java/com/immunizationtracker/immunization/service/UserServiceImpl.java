@@ -162,4 +162,20 @@ public class UserServiceImpl implements UserDetailsService, UserService
         }
 
     }
+
+    @Override
+    public User findUserByUsername(String username)
+    {
+        User currentUser = userrepos.findByUsername(username);
+        if (currentUser != null)
+        {
+            return currentUser;
+        } else
+        {
+            throw new ResourceNotFoundException("The " + username + " is not in the system");
+        }
+    }
+
+
+
 }
