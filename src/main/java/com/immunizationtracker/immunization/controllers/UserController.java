@@ -50,7 +50,7 @@ public class UserController
             response = User.class), @ApiResponse(code = 404,
             message = "User not found",
             response = ErrorDetail.class)})
-    @PreAuthorize("hasAuthority('ROLE_STUDENT')")
+//    @PreAuthorize("hasAuthority('ROLE_STUDENT')")
     @GetMapping(value = "/user",
             produces = {"application/json"})
     public ResponseEntity<?> retrieveCurrentUser(HttpServletRequest request, Authentication authentication)
