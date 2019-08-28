@@ -19,5 +19,5 @@ public interface DoctorService
 
     void updatePermissions(long doctorid, long guardianid);
 
-    void putUserToGuardian(long doctorid, long userid);
+    void putUserToDoctor(long doctorid, long userid);
 }

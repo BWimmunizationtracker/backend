@@ -100,6 +100,12 @@ private DoctorRepository doctorRepository;
 
     }
 
+    public void putUserToDoctor(long doctorid, long userid)
+    {
+        Doctor currentDoctor = doctorRepository.findById(doctorid).orElseThrow(() -> new EntityNotFoundException(Long.toString(doctorid)));
+        doctorRepository.putUserToDoctor(doctorid, userid);
+    }
+
 
 
 }
