@@ -104,7 +104,7 @@ public class GuardianController
         URI newStudentURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{guardianid}").buildAndExpand(newGuardian.getGuardianid()).toUri();
         responseHeaders.setLocation(newStudentURI);
 
-        return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
+        return new ResponseEntity<>(newGuardian, responseHeaders, HttpStatus.CREATED);
     }
 
     // update a guardian
