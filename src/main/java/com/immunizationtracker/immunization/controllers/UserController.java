@@ -50,7 +50,7 @@ public class UserController
             response = User.class), @ApiResponse(code = 404,
             message = "User not found",
             response = ErrorDetail.class)})
-//    @PreAuthorize("hasAuthority('ROLE_STUDENT')")
+//    @PreAuthorize("hasAuthority('ROLE_USER')")
     @GetMapping(value = "/user",
             produces = {"application/json"})
     public ResponseEntity<?> retrieveCurrentUser(HttpServletRequest request, Authentication authentication)
@@ -62,19 +62,19 @@ public class UserController
 
 
 //    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @GetMapping(value = "/user/{userId}",
+    @GetMapping(value = "/user/{userid}",
             produces = {"application/json"})
     public ResponseEntity<?> getUser(HttpServletRequest request,
                                      @PathVariable
-                                             Long userId)
+                                             Long userid)
     {
         logger.trace(request.getMethod().toUpperCase() + " " + request.getRequestURI() + " accessed");
 
-        User u = userService.findUserById(userId);
+        User u = userService.findUserById(userid);
         return new ResponseEntity<>(u, HttpStatus.OK);
     }
 
-
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     @GetMapping(value = "/getusername",
             produces = {"application/json"})
     @ResponseBody
@@ -141,7 +141,7 @@ public class UserController
     }
 
 
-
+//    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PutMapping(value = "/user/{userid}")
     public ResponseEntity<?> updateUser(HttpServletRequest request,
                                         @RequestBody
@@ -156,7 +156,7 @@ public class UserController
     }
 
 
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+//    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @DeleteMapping("/user/{id}")
     public ResponseEntity<?> deleteUserById(HttpServletRequest request,
                                             @PathVariable
