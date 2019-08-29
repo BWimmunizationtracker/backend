@@ -72,11 +72,11 @@ public class WardController
     }
 
     // delete Ward by id
-    @ApiOperation(value = "Get guardian by id")
+    @ApiOperation(value = "Delete guardian by id")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "Retrieved guardian", response = void.class),
-            @ApiResponse(code=404,message="Guardian not found", response = ErrorDetail.class),
-            @ApiResponse(code = 500, message = "Error finding guardian", response = ErrorDetail.class)
+            @ApiResponse(code = 200, message = "Deleted ward", response = void.class),
+            @ApiResponse(code=404,message="Ward not found", response = ErrorDetail.class),
+            @ApiResponse(code = 500, message = "Error finding ward", response = ErrorDetail.class)
     })
 //    @PreAuthorize("hasAuthority('ROLE_GUARDIAN')")
     @DeleteMapping("/ward/{wardid}")
