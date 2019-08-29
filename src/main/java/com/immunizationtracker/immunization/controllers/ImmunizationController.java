@@ -113,6 +113,7 @@ public class ImmunizationController
             @ApiResponse(code=404,message="Immunization not found", response = ErrorDetail.class),
             @ApiResponse(code = 500, message = "Error updating immunization", response = ErrorDetail.class)
     })
+    //    @PreAuthorize("hasAuthority('ROLE_DOCTOR')")
     @PutMapping(value = "/immunization/{immunizationid}")
     public ResponseEntity<?> updateImmunizationById(@RequestBody Immunization updateImmunization, @PathVariable long immunizationid, HttpServletRequest request)
     {
