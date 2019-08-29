@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -43,6 +44,7 @@ public class DoctorController
             @ApiResponse(code=404,message="Doctors not found", response = ErrorDetail.class),
             @ApiResponse(code = 500, message = "Error finding doctors", response = ErrorDetail.class)
     })
+//    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping(value = "/alldoctors", produces = {"application/json"})
     public ResponseEntity<?> listAllDoctors(HttpServletRequest request)
     {
@@ -60,6 +62,7 @@ public class DoctorController
             @ApiResponse(code=404,message="Doctor not found", response = ErrorDetail.class),
             @ApiResponse(code = 500, message = "Error finding doctor", response = ErrorDetail.class)
     })
+    @PreAuthorize("hasAuthority('ROLE_DOCTOR')")
     @GetMapping(value = "/doctor/{doctorid}", produces = {"application/json"})
     public ResponseEntity<?> getDoctorById(@PathVariable long doctorid, HttpServletRequest request)
     {
@@ -76,6 +79,7 @@ public class DoctorController
             @ApiResponse(code=404,message="Doctor not found", response = ErrorDetail.class),
             @ApiResponse(code = 500, message = "Error deleting doctor", response = ErrorDetail.class)
     })
+//    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @DeleteMapping("/doctor/{doctorid}")
     public ResponseEntity<?> deleteDoctorById(@PathVariable long doctorid, HttpServletRequest request)
     {
@@ -114,6 +118,7 @@ public class DoctorController
             @ApiResponse(code=404, message="Doctor not found", response = ErrorDetail.class),
             @ApiResponse(code = 500, message = "Error updating doctor", response = ErrorDetail.class)
     })
+    @PreAuthorize("hasAuthority('ROLE_DOCTOR')")
     @PutMapping(value = "/doctor/{doctorid}", consumes = {"application/json"}, produces = {"application/json"})
     public ResponseEntity<?> updateDoctorById(@RequestBody Doctor updateDoctor, @PathVariable long doctorid, HttpServletRequest request)
     {
@@ -130,6 +135,7 @@ public class DoctorController
             @ApiResponse(code=404, message="Doctor not found", response = ErrorDetail.class),
             @ApiResponse(code = 500, message = "Error adding Doctor to User", response = ErrorDetail.class)
     })
+//    @PreAuthorize("hasAuthority('ROLE_DOCTOR')")
     @PutMapping(value = "/doctor/{doctorid}/user/{userid}")
     public ResponseEntity<?> putDoctorToUser(HttpServletRequest request, @PathVariable long doctorid, @PathVariable long userid)
     {
