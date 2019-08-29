@@ -55,7 +55,7 @@ public class GuardianController
             @ApiResponse(code=404,message="Guardians not found", response = ErrorDetail.class),
             @ApiResponse(code = 500, message = "Error finding guardians", response = ErrorDetail.class)
     })
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+//    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping(value = "/allguardians", produces = {"application/json"})
     public ResponseEntity<?> listAllGuardians(HttpServletRequest request)
     {
@@ -84,7 +84,7 @@ public class GuardianController
     }
 
     // delete Guardian by id
-    @ApiOperation(value = "Get guardian by id")
+    @ApiOperation(value = "Delete guardian by id")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Retrieved guardian", response = void.class),
             @ApiResponse(code=404,message="Guardian not found", response = ErrorDetail.class),
@@ -220,13 +220,11 @@ public class GuardianController
         Ward ward = wardService.findWardById(wardid);
         Guardian guardian = guardianService.findGuardianById(guardianid);
 
-
-
         wardService.putGuardianToWard(wardid, guardianid);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
 
     }
-    
+
 
 }

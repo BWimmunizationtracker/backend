@@ -1,9 +1,13 @@
 package com.immunizationtracker.immunization.controllers;
 
+import com.immunizationtracker.immunization.models.ErrorDetail;
 import com.immunizationtracker.immunization.models.Immunization;
 import com.immunizationtracker.immunization.models.Ward;
 import com.immunizationtracker.immunization.service.ImmunizationService;
 import com.immunizationtracker.immunization.service.WardService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +37,13 @@ public class WardController
     private ImmunizationService immunizationService;
 
     // get all Wards
+    @ApiOperation(value = "Get all wards")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Retrieved all wards", response = void.class),
+            @ApiResponse(code=404,message="Wards not found", response = ErrorDetail.class),
+            @ApiResponse(code = 500, message = "Error finding wards", response = ErrorDetail.class)
+    })
+//    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping(value = "/allwards", produces = {"application/json"})
     public ResponseEntity<?> listAllWards(HttpServletRequest request)
     {
@@ -44,6 +55,13 @@ public class WardController
     }
 
     // get Ward by id
+    @ApiOperation(value = "Get ward by id")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Retrieved ward", response = void.class),
+            @ApiResponse(code=404,message="Ward not found", response = ErrorDetail.class),
+            @ApiResponse(code = 500, message = "Error finding ward", response = ErrorDetail.class)
+    })
+//    @PreAuthorize("hasAuthority('ROLE_GUARDIAN')")
     @GetMapping(value = "/ward/{wardid}", produces = {"application/json"})
     public ResponseEntity<?> getWardById(@PathVariable long wardid, HttpServletRequest request)
     {
@@ -54,6 +72,13 @@ public class WardController
     }
 
     // delete Ward by id
+    @ApiOperation(value = "Get guardian by id")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Retrieved guardian", response = void.class),
+            @ApiResponse(code=404,message="Guardian not found", response = ErrorDetail.class),
+            @ApiResponse(code = 500, message = "Error finding guardian", response = ErrorDetail.class)
+    })
+//    @PreAuthorize("hasAuthority('ROLE_GUARDIAN')")
     @DeleteMapping("/ward/{wardid}")
     public ResponseEntity<?> deleteWardById(@PathVariable long wardid, HttpServletRequest request)
     {
@@ -65,6 +90,12 @@ public class WardController
     }
 
     // add a new ward
+    @ApiOperation(value = "Create a new ward")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Created ward", response = void.class),
+            @ApiResponse(code = 500, message = "Error creating ward", response = ErrorDetail.class)
+    })
+    //    @PreAuthorize("hasAuthority('ROLE_GUARDIAN')")
     @PostMapping(value = "/ward")
     public ResponseEntity<?> addNewWard(@Valid @RequestBody Ward newWard, HttpServletRequest request) throws URISyntaxException
     {
@@ -81,6 +112,13 @@ public class WardController
     }
 
     // update a guardian
+    @ApiOperation(value = "Update a ward by id")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Updated ward", response = void.class),
+            @ApiResponse(code=404,message="Ward not found", response = ErrorDetail.class),
+            @ApiResponse(code = 500, message = "Error updating ward", response = ErrorDetail.class)
+    })
+//    @PreAuthorize("hasAuthority('ROLE_GUARDIAN')")
     @PutMapping(value = "/ward/{wardid}")
     public ResponseEntity<?> updateWardById(@RequestBody Ward updateWard, @PathVariable long wardid, HttpServletRequest request)
     {
@@ -91,6 +129,13 @@ public class WardController
     }
 
     // endpoint to add an immunization to the wards list
+    @ApiOperation(value = "Add an immunization to a wards list")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Added immunization to ward list", response = void.class),
+            @ApiResponse(code=404,message="Ward not found", response = ErrorDetail.class),
+            @ApiResponse(code = 500, message = "Error adding immunization to ward list", response = ErrorDetail.class)
+    })
+//    @PreAuthorize("hasAuthority('ROLE_DOCTOR')")
     @PutMapping(value = "/ward/{wardid}/immunization/{immunizationid}")
     public ResponseEntity<?> putWardToImmunization(HttpServletRequest request, @PathVariable long wardid, @PathVariable long immunizationid)
     {
